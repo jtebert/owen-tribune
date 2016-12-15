@@ -8,41 +8,44 @@
     <div class="col-md-8">
         <div class="author-page-block">
             {% if self.portrait %}
-                <div class="img-wrapper">
-                    {% image self.portrait fill-700x800 class="author-photo" %}
-                </div>
+            <div class="img-wrapper">
+                {% image self.portrait fill-700x800 class="author-photo" %}
+            </div>
             {% endif %}
             <h4 class="subject-header">Contributor</h4>
             <h3 class="author-header">{{ self.title }}</h3>
             {% if self.twitter_handle %}
-                <div id="twitter-follow"><a href="https://twitter.com/{{ self.twitter_handle }}" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+            <div id="twitter-follow">
+                <a href="https://twitter.com/{{ self.twitter_handle }}"
+                   class="twitter-follow-button" data-show-screen-name="false"
+                   data-show-count="false">Follow</a>
+                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
             {% endif %}
             <div class="author-bio">
                 {{ self.long_bio|make_markdown }}
             </div>
         </div>
-        <div class="row">
-            {% for article in self.author_articles.all %}
-                <hr/>
-                <div class="row preview-article">
-                    <div class="col-sm-3">
-                        <h4 class="subject-header"><a href="{{ article.subject.url }}">{{ article.subject }}</a></h4>
-                        <p class="date-header">{{ article.date }}</p>
-                    </div>
-                    <div class="col-sm-3">
-                        {% image article.main_image fill-500x350 as tmp_photo %}
-                        <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}} class="center-block"/>
-                    </div>
-                    <div class="col-sm-6">
-                        <h2 class="article-header"><a href="{{ article.url }}">{{ article.title }}</a></h2>
-                        <h3 class="author-header">By <a href="{{ article.author.url }}">{{ article.author }}</a></h3>
-                        <p class="intro">{{ article.intro }}</p>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
     </div>
-
-</div>
+    <div class="row">
+        {% for article in self.author_articles.all %}
+        <hr/>
+        <div class="row preview-article">
+            <div class="col-sm-3">
+                <h4 class="subject-header"><a href="{{ article.subject.url }}">{{ article.subject }}</a></h4>
+                <p class="date-header">{{ article.date }}</p>
+            </div>
+            <div class="col-sm-3">
+                {% image article.main_image fill-500x350 as tmp_photo %}
+                <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}} class="center-block"/>
+            </div>
+            <div class="col-sm-6">
+                <h2 class="article-header"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                <h3 class="author-header">By <a href="{{ article.author.url }}">{{ article.author }}</a></h3>
+                <p class="intro">{{ article.intro }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
