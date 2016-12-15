@@ -1,0 +1,127 @@
+{% extends "page.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags wagtailsettings_tags make_markdown %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block page-content %}
+{% get_settings %}
+
+<div class="row">
+    <div class="col-md-12 article">
+        <h4 class="subject-header"><a href="{{ self.subject.url }}">{{ self.subject }}</a></h4>
+        <h2 class="article-header">{{ self.title }}</h2>
+        <div class="author-info">
+            {% if self.author.portrait %}
+                {% image self.author.portrait fill-48x48 class="author-photo" %}
+            {% endif %}
+            <h3 class="author-header">By <a href="{{ self.author.url }}">{{ self.author }}</a><span class="date-header">&emsp;&emsp;{{ self.date }}</span></h3>
+        </div>
+    <hr/>
+    </div>
+</div>
+
+<div class="row">
+<div class="col-md-8">
+    <div class="article">
+
+        {% if self.main_image %}
+            <figure class="captioned-image">
+                {% image self.main_image fill-800x450 class="article-photo" %}
+                <figcaption>
+                    {% if self.main_image.caption %}
+                        {{ self.main_image.caption|make_markdown }}
+                    {% elif self.main_image.caption %}
+                        {{ self.main_image.caption|make_markdown }}
+                    {% endif %}
+
+                    {% if self.main_image.source_url and self.main_image.source_name %}
+                        <a href="{{ self.main_image.source_url }}" class="img-source">{{ self.main_image.source_name }}</a>
+                    {% elif self.main_image.source_url %}
+                        <a href="{{ self.main_image.source_url }}" class="img-source">Source</a>
+                    {% elif self.main_image.source_name %}
+                        <span  class="img-source">{{ self.main_image.source_name }}</span>
+                    {% endif %}
+                </figcaption>
+            </figure>
+        {% endif %}
+
+        <div class="article-content">
+
+            <div class="article-body">
+
+                {% for block in self.body %}
+                    {% if block.block_type == 'text' %}
+                        {{ block|make_markdown }}
+                    {% else %}
+                        {{ block }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+
+         <div class="author-block">
+                {% if self.author.portrait %}
+                    {% image self.author.portrait fill-100x100 class="author-photo" %}
+                {% endif %}
+                <div class="author-bio">
+                    {{ self.author.short_bio|make_markdown }}&emsp;
+                    <a class="author-more" href="{{ self.author.url }}">More</a>
+                </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-md-4">
+
+    <!-- Social Media Sharing Links -->
+
+    <div class="social-icons">
+        <h2 class="info-header">Share</h2>
+        <div class="social-info">
+            <a href="https://facebook.com/sharer.php?u={{ request.get_host }}{{ request.path }}" rel="nofollow" target="_blank" title="Share on Facebook">
+                <i class="fa fa-facebook fa-2x"></i></a>
+            <a href="https://plus.google.com/share?url={{ request.get_host }}{{ request.path }}" rel="nofollow" target="_blank" title="Share on Google+">
+                <i class="fa fa-google-plus fa-2x"></i></a>
+            <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ request.get_host }}{{ request.path }}&title={{ self.title }}&summary={{ self.intro }}&source={{ request.get_host }}" rel="nofollow" target="_blank" title="Share on LinkedIn">
+                <i class="fa fa-linkedin fa-2x"></i></a>
+            <a href="http://www.reddit.com/submit?url={{ request.get_host }}{{ request.path }}&title={{ self.title }}" rel="nofollow" target="_blank" title="Share on Reddit">
+                <i class="fa fa-reddit fa-2x"></i></a>
+            <a href="http://www.tumblr.com/share/link?url={{ request.get_host }}{{ request.path }}&name={[ self.title }}&description={{ self.intro }}" rel="nofollow" target="_blank" title="Share on Tumblr">
+                <i class="fa fa-tumblr fa-2x"></i></a>
+            <a href="https://twitter.com/intent/tweet?text={{ self.title }}&url={{ request.get_host }}{{ request.path }}" rel="nofollow" target="_blank" title="Share on Twitter">
+                <i class="fa fa-twitter fa-2x"></i></a>
+            <!-- TODO: Add back on "related" and "via" when Twitter username defined somewhere -->
+            <!--<a href="https://twitter.com/intent/tweet?text={{ self.title }}&url={{ request.path }}&via={{ site.twitter_username }}&related={{ site.twitter_username }}" rel="nofollow" target="_blank" title="Share on Twitter">
+                <i class="fa fa-twitter fa-2x"></i></a>-->
+        </div>
+    </div>
+</div>
+
+
+{% if settings.home.GeneralSettings.disqus %}
+<div class="col-md-8">
+    <div class="info-box">
+        <h2 class="info-header">Comments</h2>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            var disqus_shortname = '{{ settings.home.GeneralSettings.disqus }}';
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>
+</div>
+{% endif %}
+
+</div>
+
+{% endblock %}

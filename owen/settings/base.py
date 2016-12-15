@@ -27,7 +27,9 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     'home',
-    'search',
+    #'search',
+    'images',
+    'blog',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailsearch',
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
+    'wagtail.contrib.settings',
 
     'modelcluster',
     'taggit',
@@ -135,8 +138,12 @@ MEDIA_URL = '/media/'
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "owen"
-
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+# Wagtail settings
+
+WAGTAIL_SITE_NAME = "The Owen Tribune"
+
+WAGTAILIMAGES_IMAGE_MODEL = 'images.CustomImage'

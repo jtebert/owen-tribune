@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load subject_menu %}
+
+{% block content %}
+    {% subject_menu current_page=self %}
+
+    {% block full-width-content %}
+        <div class="container content-wrapper">
+            {% block page-content %}{% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "page.html" %}
+{% load make_markdown %}
+
+{% block page-content %}
+
+<div class="row">
+    <div class="col-md-12 article">
+        <h2 class="article-header">{{ self.title }}</h2>
+        <hr/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 article">
+        {% for block in self.body %}
+            {% if block.block_type == 'text' %}
+                {{ block|make_markdown }}
+            {% else %}
+                {{ block }}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

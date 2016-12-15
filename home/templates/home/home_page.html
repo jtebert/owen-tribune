@@ -1,11 +1,47 @@
 {% extends "base.html" %}
 
+{% load subject_menu wagtailcore_tags wagtailimages_tags wagtailsettings_tags static %}
+
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-    <h1>Welcome to your new Wagtail site!</h1>
+{% get_settings %}
 
-    <p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a> (make sure you have run "./manage.py createsuperuser" in the console first).
+<div class="container">
 
-    <p>If you haven't already given the documentation a read, head over to <a href="http://docs.wagtail.io/">http://docs.wagtail.io</a> to start building on Wagtail</p>
+    <h1 id="paper-title"><a href="{% slugurl 'home' %}">{{ settings.home.GeneralSettings.site_name }}</a></h1>
+
+    {% subject_menu current_page=self %}
+</div><!--/.container-->
+
+<div class="container">
+
+{% if self.featured_article %}
+    {% with self.featured_article as fa %}
+  <div class="row featured-article">
+    <div class="col-md-7">
+        {% image fa.main_image fill-1000x600 as tmp_photo %}
+        <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}}/>
+    </div>
+    <div class="col-md-5">
+      <h4 class="subject-header"><a href="{{ fa.subject.url }}">{{ fa.subject }}</a></h4>
+      <h2 class="article-header"><a href="{{ fa.url }}">{{ fa.title }}</a></h2>
+      <h3 class="author-header">By <a href="{{ fa.author.url }}">{{ fa.author }}</a></h3>
+      <p class="intro">{{ fa.intro }}</p>
+    </div>
+  </div>
+  <hr/>
+    {% endwith %}
+{% endif %}
+
+  <div class="row border-between">
+
+      {% for a in self.preview_articles.all %}
+        {% with a.article as article %}
+            {% include "blog/preview_article.html" %}
+        {% endwith %}
+    {% endfor %}
+  </div>
+
+</div> <!-- /container -->
 {% endblock %}

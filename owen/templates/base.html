@@ -1,4 +1,5 @@
-{% load static wagtailuserbar %}
+{% load static wagtailuserbar wagtailcore_tags wagtailsettings_tags %}
+{% get_settings %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -12,8 +13,13 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
         {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-custom.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/owen.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -21,15 +27,63 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
 
         {% block content %}{% endblock %}
 
+        {% block footer %}
+        <div class="container">
+        <footer>
+            <hr>
+            <div class="wrap">
+              <ul class="nav navbar-nav footer-nav">
+                <li><a href="{% slugurl 'home' %}">Home</a></li>
+                <li><a href="{% slugurl 'about' %}">About</a></li>
+                <li><a href="#!">Careers</a></li>
+                <li><a href="#!">Terms of Service</a></li>
+                <li><a href="{% slugurl 'contact' %}">Contact</a></li>
+              </ul>
+            </div>
+              <div class="row">
+                <div class="col-md-12"><p>&copy; 2016 Owen Tribune</p></div>
+              </div>
+          </footer>
+        </div>
+        {% endblock %}
+
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/owen.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+        {% with settings.home.GeneralSettings.google_analytics as google_analytics %}
+            {% if google_analytics %}
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', '{{ google_analytics }}', 'auto');
+                ga('send', 'pageview');
+
+            </script>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="../../dist/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
+
+    {% wagtailuserbar %}
+
     </body>
 </html>
