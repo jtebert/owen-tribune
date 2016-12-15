@@ -157,6 +157,7 @@ env = os.environ.copy()
 
 AWS_ACCESS_KEY_ID = 'AKIAJJOUJRBH63F3RPHQ'
 AWS_SECRET_ACCESS_KEY = '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'
+AWS_S3_HOST = 's3-us-east-2.amazonaws.com'
 
 #AWS_SECRET_ACCESS_KEY = env['AWS_SECRET_ACCESS_KEY']
 #AWS_ACCESS_KEY_ID = env['AWS_ACCESS_KEY_ID']
@@ -182,4 +183,4 @@ STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
 MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+DEFAULT_FILE_STORAGE = 'owen.custom_storages.MediaStorage'
