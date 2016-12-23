@@ -115,7 +115,7 @@ class GeneralSettings(BaseSetting):
 
     panels = [
         FieldPanel('site_name'),
-        ImageChooserPanel('favicon'),
+        #ImageChooserPanel('favicon'),
         FieldPanel('site_tagline'),
         FieldPanel('site_description'),
         FieldPanel('pagination_count'),
