@@ -1,0 +1,37 @@
+{
+	"Version": "2008-10-17",
+	"Statement": [
+		{
+			"Sid": "PublicReadForGetBucketObjects",
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "*"
+			},
+			"Action": "s3:GetObject",
+			"Resource": "arn:aws:s3:::owen-tribune/*"
+		},
+		{
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "arn:aws:iam::494147019987:user/jtebert"
+			},
+			"Action": "s3:*",
+			"Resource": [
+				"arn:aws:s3:::owen-tribune",
+				"arn:aws:s3:::owen-tribune/*"
+			]
+		},
+		{
+			"Sid": "somethingElse",
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "arn:aws:iam::494147019987:user/jtebert"
+			},
+			"Action": "s3:ListBucket",
+			"Resource": [
+				"arn:aws:s3:::owen-tribune",
+				"arn:aws:s3:::owen-tribune/*"
+			]
+		}
+	]
+}
