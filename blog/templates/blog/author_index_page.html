@@ -1,0 +1,27 @@
+{% extends "page.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags create_page_range make_markdown %}
+
+{% block page-content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="subject-box" id="index-intro">
+            <h2 class="subject-header">{{ self.title }}</h2>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<div class="row display-flex">
+    {% for author in self.authors %}
+        <div class="col-md-3 col-sm-4 col-xs-6 author-preview">
+            {% image author.portrait fill-500x500 as tmp_photo %}
+            <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}} class="author-photo"/>
+            <h3 class="author-header"><a href="{{ author.url }}">{{ author }}</a></h3>
+            <p>{{ author.short_bio }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

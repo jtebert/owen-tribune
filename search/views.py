@@ -4,6 +4,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 
 from wagtail.wagtailcore.models import Page
+from blog.models import ArticlePage
 from wagtail.wagtailsearch.models import Query
 
 
@@ -13,13 +14,13 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = Page.objects.live().search(search_query)
+        search_results = ArticlePage.objects.live().search(search_query)
         query = Query.get(search_query)
 
         # Record hit
         query.add_hit()
     else:
-        search_results = Page.objects.none()
+        search_results = ArticlePage.objects.none()
 
     # Pagination
     paginator = Paginator(search_results, 10)

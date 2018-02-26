@@ -7,15 +7,16 @@
 {% block page-content %}
 
 <div class="row">
-<div class="col-md-12">
-    <div class="subject-box" id="index-intro">
-        <h2 class="subject-header">{{ self.title }}</h2>
-        <div class="subject-info">
-            {{ self.intro|make_markdown }}
+    <div class="col-md-12">
+        <div class="subject-box" id="index-intro">
+            <h2 class="subject-header">{{ self.title }}</h2>
+            <div class="subject-info">
+                {{ self.intro|make_markdown }}
+            </div>
         </div>
     </div>
 </div>
-</div>
+
 <div class="row">
     <div class="col-md-12">
         {% if articles %}

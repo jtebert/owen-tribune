@@ -19,6 +19,7 @@ from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.wagtailcore import blocks
+from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
@@ -96,33 +97,11 @@ class QuoteBlock(blocks.StructBlock):
         template = 'blog/quote.html'
 
 '''
-class ExtraInformationBlock(blocks.StructBlock):
-    title = blocks.CharBlock()
-    text = blocks.TextBlock(help_text=md_format_help)
-
-    class Meta:
-        icon = 'collapse-down'
-        template = 'blog/extra_information_block.html'
-        label = 'Foldout Box'
-
-
 class CodeBlock(blocks.TextBlock):
     class Meta:
         template = 'blog/code_blog.html'
         icon = 'code'
         label = 'Code'
-
-
-class SubjectPanelField(Orderable):
-    page = ParentalKey('ArticlePage', related_name='subjects')
-    subject = models.ForeignKey(SubjectSnippet)
-
-    panels = [
-        SnippetChooserPanel('subject'),
-    ]
-
-    def __unicode__(self):
-        return unicode(self.subject)
 '''
 
 
@@ -158,7 +137,6 @@ class ArticlePage(Page):
         ('pull_quote', QuoteBlock()),
         ('table', TableBlock(template='blog/table_block.html')),
     ])
-
     tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
 
     content_panels = Page.content_panels + [
@@ -168,6 +146,11 @@ class ArticlePage(Page):
         FieldPanel('intro'),
         StreamFieldPanel('body'),
         FieldPanel('tags'),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField('body'),
+        #index.SearchField('tags__name'),
     ]
 
     class Meta:
@@ -214,10 +197,6 @@ class SourceLink(models.Model):
     class Meta:
         abstract = True
 
-'''
-class ArticleSourceLink(Orderable, SourceLink):
-    page = ParentalKey('ArticlePage', related_name='source_links')
-'''
 
 class LinkFields(models.Model):
     link_external = models.URLField("External link", blank=True)

@@ -254,13 +254,23 @@ blockquote.pull-quote {
     display: inline-block;
     margin: 8px;
 }
-.social-icons a:hover, .tag a:hover {
+.social-icons a:hover {
     color: #DF3331;
-    text-decoration: none;
 }
 
 .tag {
     display: inline-block;
+}
+
+.tag a:hover {
+    text-decoration: none;
+}
+.tag a:hover .label {
+    background-color: #DF3331;
+}
+
+form.search {
+    text-align: center;
 }
 
 
@@ -307,6 +317,29 @@ blockquote.pull-quote {
   .author-page-block #twitter-follow {
       text-align: center;
   }
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row.display-flex > [class*='col'] {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+.author-preview .author-photo {
+    display: block;
+    width: 90%;
+    height: auto;
+    margin: auto;
+    border-radius: 50%;
+}
+.author-preview .author-header a {
+    font-size: 28px;
+}
+.author-preview {
+    margin-bottom: 32px;
 }
 
 

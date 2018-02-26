@@ -4,7 +4,7 @@
     <h4 class="subject-header"><a href="{{ article.subject.url }}">{{ article.subject }}</a></h4>
     {% image article.main_image fill-500x350 as tmp_photo %}
     <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}} class="center-block"/>
-  <h2 class="article-header"><a href="{{ article.url }}">{{ article.title }}</a></h2>
-  <h3 class="author-header">By <a href="{{ article.author.url }}">{{ article.author }}</a></h3>
-  <p class="intro">{{ article.intro }}</p>
+    <h2 class="article-header"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+    <h3 class="author-header">By <a href="{{ article.author.url }}">{{ article.author }}</a></h3>
+    <p class="intro">{{ article.intro }}</p>
 </div>
