@@ -4,6 +4,10 @@ from .base import *
 
 DEBUG = False
 
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
 try:
     from .local import *
 except ImportError:

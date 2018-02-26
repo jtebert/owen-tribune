@@ -141,6 +141,9 @@ MEDIA_URL = '/media/'
 
 # Wagtail settings
 
+TAGGIT_CASE_INSENSITIVE = True
+TAG_SPACES_ALLOWED = True
+
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
@@ -156,12 +159,8 @@ WAGTAILIMAGES_IMAGE_MODEL = 'images.CustomImage'
 
 env = os.environ.copy()
 
-AWS_ACCESS_KEY_ID = 'AKIAJJOUJRBH63F3RPHQ'
-AWS_SECRET_ACCESS_KEY = '9ohycaFCZzUZe9c1nQkTXHrjvu7MDP2FTC+EzERX'
 AWS_S3_HOST = 's3-us-east-2.amazonaws.com'
 
-#AWS_SECRET_ACCESS_KEY = env['AWS_SECRET_ACCESS_KEY']
-#AWS_ACCESS_KEY_ID = env['AWS_ACCESS_KEY_ID']
 AWS_STORAGE_BUCKET_NAME = 'owen-tribune'
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
@@ -178,9 +177,9 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 # Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
 # you run `collectstatic`).
 
+# Use local static files in development (i.e., unless using production.py)
 STATICFILES_LOCATION = 'static'
-STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+STATIC_URL = '/static/'
 
 MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)

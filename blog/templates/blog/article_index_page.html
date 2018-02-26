@@ -17,68 +17,53 @@
 </div>
 </div>
 <div class="row">
-<div class="col-md-12">
-    {% if articles %}
-        {% for article in articles %}
-            <hr/>
-            <div class="row preview-article">
-                <div class="col-sm-3">
-                    <h4 class="subject-header"><a href="{{ article.subject.url }}">{{ article.subject }}</a></h4>
-                    <p class="date-header">{{ article.date }}</p>
-                </div>
-                <div class="col-sm-3">
-                    {% image article.main_image fill-500x350 as tmp_photo %}
-                    <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}} class="center-block"/>
-                </div>
-                <div class="col-sm-6">
-                    <h2 class="article-header"><a href="{{ article.url }}">{{ article.title }}</a></h2>
-                    <h3 class="author-header">By <a href="{{ article.author.url }}">{{ article.author }}</a></h3>
-                    <p class="intro">{{ article.intro }}</p>
-                </div>
-            </div>
-        {% endfor %}
+    <div class="col-md-12">
+        {% if articles %}
+            {% for article in articles %}
+                {% include "blog/article_row.html" %}
+            {% endfor %}
 
-        <div class="pagination">
-            {% if articles and articles.paginator.num_pages > 1 %}
-                {% if articles.has_previous %}
-                    <a href="?page=1">
-                        <i class="fa fa-angle-double-left"></i>
-                    </a>
-                    <a href="?page={{ articles.previous_page_number }}">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                {% endif %}
-
-                {% create_page_range articles.paginator.page_range articles.number as page_range %}
-
-                {% if 1 not in page_range %}
-                    <span>...</span>
-                {% endif %}
-                {% for page in page_range %}
-                    {% if page == articles.number %}
-                        <span class="current-page page">{{ page }}</span>
-                    {% else %}
-                        <a href="?page={{ page }}" class="page">{{ page }}</a>
+            <div class="pagination">
+                {% if articles and articles.paginator.num_pages > 1 %}
+                    {% if articles.has_previous %}
+                        <a href="?page=1">
+                            <i class="fa fa-angle-double-left"></i>
+                        </a>
+                        <a href="?page={{ articles.previous_page_number }}">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
                     {% endif %}
-                {% endfor %}
-                {% if articles.paginator.num_pages not in page_range %}
-                    <span>...</span>
-                {% endif %}
 
-                {% if articles.has_next %}
-                    <a href="?page={{ articles.next_page_number }}">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                    <a href="?page={{ articles.paginator.num_pages }}">
-                        <i class="fa fa-angle-double-right"></i>
-                    </a>
+                    {% create_page_range articles.paginator.page_range articles.number as page_range %}
+
+                    {% if 1 not in page_range %}
+                        <span>...</span>
+                    {% endif %}
+                    {% for page in page_range %}
+                        {% if page == articles.number %}
+                            <span class="current-page page">{{ page }}</span>
+                        {% else %}
+                            <a href="?page={{ page }}" class="page">{{ page }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    {% if articles.paginator.num_pages not in page_range %}
+                        <span>...</span>
+                    {% endif %}
+
+                    {% if articles.has_next %}
+                        <a href="?page={{ articles.next_page_number }}">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                        <a href="?page={{ articles.paginator.num_pages }}">
+                            <i class="fa fa-angle-double-right"></i>
+                        </a>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
-        </div>
-    {% else %}
-        <p style="text-align: center">No articles</p>
-    {% endif %}
-</div>
+            </div>
+        {% else %}
+            <p style="text-align: center">No articles</p>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}

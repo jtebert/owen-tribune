@@ -4,6 +4,8 @@ from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
 
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import StreamField
@@ -124,6 +126,10 @@ class SubjectPanelField(Orderable):
 '''
 
 
+class ArticlePageTag(TaggedItemBase):
+    content_object = ParentalKey('ArticlePage', related_name='tagged_items')
+
+
 class ArticlePage(Page):
     parent_page_types = ["ArticleIndexPage",]
     subpage_types = []
@@ -153,12 +159,15 @@ class ArticlePage(Page):
         ('table', TableBlock(template='blog/table_block.html')),
     ])
 
+    tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
+
     content_panels = Page.content_panels + [
         PageChooserPanel('author', ),
         FieldPanel('date'),
         ImageChooserPanel('main_image'),
         FieldPanel('intro'),
         StreamFieldPanel('body'),
+        FieldPanel('tags'),
     ]
 
     class Meta:
@@ -272,6 +281,11 @@ class ArticleIndexPage(Page):
         context = super(ArticleIndexPage, self).get_context(
             request, *args, **kwargs)
         articles = self.articles()
+
+        # Tags
+        tag = request.GET.get('tag')
+        if tag:
+            articles = articles.filter(tags__name=tag)
 
         # Pagination
         page = request.GET.get('page')

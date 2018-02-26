@@ -247,15 +247,20 @@ blockquote.pull-quote {
     font-size: 16px;
 }
 
-.social-icons {
+.social-icons, .info-header {
     text-align: center;
 }
 .social-icons a {
     display: inline-block;
     margin: 8px;
 }
-.social-icons a:hover {
+.social-icons a:hover, .tag a:hover {
     color: #DF3331;
+    text-decoration: none;
+}
+
+.tag {
+    display: inline-block;
 }
 
 
