@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col-md-12">
         <form action="{% url 'search' %}" method="get" class="form-inline search">
-            <input type="text" class="form-control" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+            <input type="text" class="form-control" name="query" {% if search_query %} value="{{ search_query }}"{% endif %}>
             <input type="submit" value="Search" class="btn btn-default">
         </form>
     </div>
