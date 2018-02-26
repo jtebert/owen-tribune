@@ -15,6 +15,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel,
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -136,6 +137,7 @@ class ArticlePage(Page):
     main_image = models.ForeignKey(
         'images.CustomImage',
         null=True,
+        blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
     )
@@ -148,6 +150,7 @@ class ArticlePage(Page):
         ('image', CaptionedImageBlock()),
         ('embed', EmbedBlock(icon='media')),
         ('pull_quote', QuoteBlock()),
+        ('table', TableBlock(template='blog/table_block.html')),
     ])
 
     content_panels = Page.content_panels + [

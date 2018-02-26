@@ -323,7 +323,7 @@ footer .nav a {
 }
 footer .nav > li > a:hover {
     background-color: transparent;
-    color: #DF3331;
+    //color: #DF3331;
 }
 footer div {
     text-align: center;
