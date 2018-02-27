@@ -16,8 +16,10 @@
 <div class="row display-flex">
     {% for author in self.authors %}
         <div class="col-md-3 col-sm-4 col-xs-6 author-preview">
-            {% image author.portrait fill-500x500 as tmp_photo %}
-            <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}} class="author-photo"/>
+            {% if author.portrait %}
+                {% image author.portrait fill-500x500 as tmp_photo %}
+                <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}} class="author-photo"/>
+            {% endif %}
             <h3 class="author-header"><a href="{{ author.url }}">{{ author }}</a></h3>
             <p>{{ author.short_bio }}</p>
         </div>
