@@ -258,10 +258,13 @@ blockquote.pull-quote {
     color: #DF3331;
 }
 
+.tags {
+    text-align: center;
+}
 .tag {
     display: inline-block;
+    text-align: center;
 }
-
 .tag a:hover {
     text-decoration: none;
 }

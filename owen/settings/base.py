@@ -44,11 +44,13 @@ INSTALLED_APPS = [
     'wagtail.wagtailcore',
     'wagtail.contrib.settings',
     'wagtail.contrib.table_block',
+    'wagtail.contrib.modeladmin',
 
     'modelcluster',
     'taggit',
     'compressor',
     'storages',
+    'wagtailmenus',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -87,6 +89,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'wagtail.contrib.settings.context_processors.settings',
+                'wagtailmenus.context_processors.wagtailmenus',
             ],
         },
     },
