@@ -14,6 +14,10 @@ You'll also have to set up a postgres database. I do this by reading the error m
 
 In development, static and media files are served from local folders. In production, they will be served from Amazon S3. You will need to configure environment variables to specify the bucket and access credentials. (See `owen/settings/production.py` for details.)
 
+### Possibly necessary steps (if not previously set up)
+
+- Install postgresql (on Ubuntu: `sudo apt install libpq-dev postgresql`)
+
 ## Features:
 
 - Articles:
