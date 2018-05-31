@@ -6,6 +6,10 @@ This is a news/magazine/blog backend and template. The design is heavily inspire
 ## Setup:
 
 - Install requirements: `pip install -r requirements.txt`
+- Create database (`owen_db`):
+  - Run as postgres user: `sudo -i -u postgres`
+  - Create database: `createdb owen_db`
+  - Get out: `exit`
 - Run migrations: `python manage.py migrate`
 - Create superuser: `python manage.py createsuperuser`
 - Run it: `python manage.py runserver`
@@ -17,6 +21,8 @@ In development, static and media files are served from local folders. In product
 ### Possibly necessary steps (if not previously set up)
 
 - Install postgresql (on Ubuntu: `sudo apt install libpq-dev postgresql`)
+- Start postgresql: `sudo service postgresql start`
+- Create a postgres user: `sudo -u createuser YOUR_USERNAME`
 
 ## Features:
 
