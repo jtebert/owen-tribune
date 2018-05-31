@@ -74,7 +74,6 @@ class InfoPage(Page):
         verbose_name = 'Information Page'
 
 
-
 @register_setting
 class GeneralSettings(BaseSetting):
     site_name = models.CharField(
@@ -123,3 +122,13 @@ class GeneralSettings(BaseSetting):
         FieldPanel('google_analytics_id'),
         FieldPanel('google_custom_search_key'),
     ]
+
+
+@register_setting
+class StyleSettings(BaseSetting):
+    site_title_font = models.CharField(
+        max_length=127,
+        help_text='Name of font family to use for site title')
+    site_title_weight = models.CharField(
+        max_length=127,
+        help_text='eg, bold, 700')

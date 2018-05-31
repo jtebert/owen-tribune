@@ -18,7 +18,6 @@ html5lib==0.999999999
 idna==2.6
 Markdown==2.6.6
 Pillow==5.0.0
-pkg-resources==0.0.0
 psycopg2==2.6.2
 pytz==2018.3
 rcssmin==1.0.6

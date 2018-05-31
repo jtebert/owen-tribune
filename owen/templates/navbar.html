@@ -9,7 +9,11 @@
     <div class="container">
         <div class="navbar-header">
             {% if current_page|to_class_name != "HomePage" %}
-            <a class="navbar-brand" href="/">{{ settings.home.GeneralSettings.site_name }}</a>
+                <a class="navbar-brand" href="/"
+                    style="font-family:{{ settings.home.StyleSettings.site_title_font }};
+                           font-weight:{{ settings.home.StyleSettings.site_title_weight }}">
+                    {{ settings.home.GeneralSettings.site_name }}
+                </a>
             {% endif %}
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar">

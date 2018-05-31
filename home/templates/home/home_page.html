@@ -10,7 +10,11 @@
 
 <div class="container">
 
-    <h1 id="paper-title"><a href="{% slugurl 'home' %}">{{ settings.home.GeneralSettings.site_name }}</a></h1>
+    <h1 id="paper-title"><a href="{% slugurl 'home' %}"
+      style="font-family:{{ settings.home.StyleSettings.site_title_font }};
+             font-weight:{{ settings.home.StyleSettings.site_title_weight }}">
+      {{ settings.home.GeneralSettings.site_name }}
+    </a></h1>
 
     {% subject_menu current_page=self %}
 </div><!--/.container-->
