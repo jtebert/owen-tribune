@@ -3,16 +3,20 @@
 
 This is a news/magazine/blog backend and template. The design is heavily inspired by *The New Yorker* and *The New York Times*. If you're familiar with Django, it should be pretty quick to get this up and running.
 
-## Setup:
+## Setup (Ubuntu Linux):
 
-- Install requirements: `pip install -r requirements.txt`
+- Install system packages: `sudo apt install libpq-dev postgresql python3-dev python3-venv`
+- Create a virtual environment: `python3 -m venv venv`
+- Activate the virtual environment: `source venv/bin/activate` (deactivate with `deactivate`)
+- Install python packages: `pip3 install wheel; pip3 install -r requirements.txt`
+- Start postgresql (if not already running): `sudo service postgresql start`
 - Create database (`owen_db`):
   - Run as postgres user: `sudo -i -u postgres`
   - Create database: `createdb owen_db`
   - Get out: `exit`
-- Run migrations: `python manage.py migrate`
-- Create superuser: `python manage.py createsuperuser`
-- Run it: `python manage.py runserver`
+- Run migrations: `python3 manage.py migrate`
+- Create superuser: `python3 manage.py createsuperuser`
+- Run it: `python3 manage.py runserver`
 
 You'll also have to set up a postgres database. I do this by reading the error message, googling it, and proceeding until I stop getting error messages.
 
@@ -20,8 +24,6 @@ In development, static and media files are served from local folders. In product
 
 ### Possibly necessary steps (if not previously set up)
 
-- Install postgresql (on Ubuntu: `sudo apt install libpq-dev postgresql`)
-- Start postgresql: `sudo service postgresql start`
 - Create a postgres user: `sudo -u createuser YOUR_USERNAME`
 
 ## Features:

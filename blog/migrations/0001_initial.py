@@ -6,10 +6,10 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 import modelcluster.fields
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtailembeds.blocks
-import wagtail.wagtailimages.blocks
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.embeds.blocks
+import wagtail.images.blocks
 
 
 class Migration(migrations.Migration):
@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
                 ('date', models.DateField(verbose_name=b'Post date')),
                 ('intro', models.TextField(help_text=b'This will only appear in article previews, not with the full article.This text will be formatted with markdown.', max_length=250)),
-                ('body', wagtail.wagtailcore.fields.StreamField([(b'text', wagtail.wagtailcore.blocks.TextBlock(help_text=b'This text will be formatted with markdown.', icon=b'pilcrow')), (b'image', wagtail.wagtailcore.blocks.StructBlock([(b'image', wagtail.wagtailimages.blocks.ImageChooserBlock()), (b'caption', wagtail.wagtailcore.blocks.CharBlock(blank=True, help_text=b'This will override the default caption.This text will be formatted with markdown.', null=True, required=False))])), (b'embed', wagtail.wagtailembeds.blocks.EmbedBlock(icon=b'media')), (b'extra_information', wagtail.wagtailcore.blocks.StructBlock([(b'title', wagtail.wagtailcore.blocks.CharBlock()), (b'text', wagtail.wagtailcore.blocks.TextBlock(help_text=b'This text will be formatted with markdown.'))]))])),
+                ('body', wagtail.core.fields.StreamField([(b'text', wagtail.core.blocks.TextBlock(help_text=b'This text will be formatted with markdown.', icon=b'pilcrow')), (b'image', wagtail.core.blocks.StructBlock([(b'image', wagtail.images.blocks.ImageChooserBlock()), (b'caption', wagtail.core.blocks.CharBlock(blank=True, help_text=b'This will override the default caption.This text will be formatted with markdown.', null=True, required=False))])), (b'embed', wagtail.embeds.blocks.EmbedBlock(icon=b'media')), (b'extra_information', wagtail.core.blocks.StructBlock([(b'title', wagtail.core.blocks.CharBlock()), (b'text', wagtail.core.blocks.TextBlock(help_text=b'This text will be formatted with markdown.'))]))])),
             ],
             options={
                 'verbose_name': 'Article',

@@ -4,18 +4,18 @@ from django.db import models
 
 from modelcluster.fields import ParentalKey
 
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.core.models import Page
+from wagtail.core.fields import RichTextField
+from wagtail.admin.edit_handlers import FieldPanel
 
-from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, PageChooserPanel, StreamFieldPanel, MultiFieldPanel
-from wagtail.wagtailembeds.blocks import EmbedBlock
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
+from wagtail.core.models import Page, Orderable
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, PageChooserPanel, StreamFieldPanel, MultiFieldPanel
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.core import blocks
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 
@@ -50,7 +50,9 @@ class HomePage(Page):
 
 class PreviewArticle(Orderable):
     page = ParentalKey('HomePage', related_name='preview_articles')
-    article = models.ForeignKey(ArticlePage)
+    article = models.ForeignKey(ArticlePage,
+        on_delete=models.SET_NULL,
+        null=True)
 
     panels = [
         PageChooserPanel('article'),
