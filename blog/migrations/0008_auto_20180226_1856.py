@@ -4,10 +4,10 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 import wagtail.contrib.table_block.blocks
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtailembeds.blocks
-import wagtail.wagtailimages.blocks
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.embeds.blocks
+import wagtail.images.blocks
 
 
 class Migration(migrations.Migration):
@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='articlepage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField([(b'text', wagtail.wagtailcore.blocks.TextBlock(help_text=b'This text will be formatted with markdown.', icon=b'pilcrow')), (b'image', wagtail.wagtailcore.blocks.StructBlock([(b'image', wagtail.wagtailimages.blocks.ImageChooserBlock()), (b'caption', wagtail.wagtailcore.blocks.CharBlock(blank=True, help_text=b'This will override the default caption.This text will be formatted with markdown.', null=True, required=False))])), (b'embed', wagtail.wagtailembeds.blocks.EmbedBlock(icon=b'media')), (b'pull_quote', wagtail.wagtailcore.blocks.StructBlock([(b'quote', wagtail.wagtailcore.blocks.TextBlock()), (b'author', wagtail.wagtailcore.blocks.CharBlock())])), (b'table', wagtail.contrib.table_block.blocks.TableBlock())]),
+            field=wagtail.core.fields.StreamField([(b'text', wagtail.core.blocks.TextBlock(help_text=b'This text will be formatted with markdown.', icon=b'pilcrow')), (b'image', wagtail.core.blocks.StructBlock([(b'image', wagtail.images.blocks.ImageChooserBlock()), (b'caption', wagtail.core.blocks.CharBlock(blank=True, help_text=b'This will override the default caption.This text will be formatted with markdown.', null=True, required=False))])), (b'embed', wagtail.embeds.blocks.EmbedBlock(icon=b'media')), (b'pull_quote', wagtail.core.blocks.StructBlock([(b'quote', wagtail.core.blocks.TextBlock()), (b'author', wagtail.core.blocks.CharBlock())])), (b'table', wagtail.contrib.table_block.blocks.TableBlock())]),
         ),
     ]

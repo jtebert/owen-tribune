@@ -3,10 +3,10 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtailembeds.blocks
-import wagtail.wagtailimages.blocks
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.embeds.blocks
+import wagtail.images.blocks
 
 
 class Migration(migrations.Migration):
@@ -23,6 +23,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='infopage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('text', wagtail.wagtailcore.blocks.TextBlock(help_text='This text will be formatted with markdown.', icon='pilcrow')), ('image', wagtail.wagtailcore.blocks.StructBlock((('image', wagtail.wagtailimages.blocks.ImageChooserBlock()), ('caption', wagtail.wagtailcore.blocks.CharBlock(blank=True, help_text='This will override the default caption.This text will be formatted with markdown.', null=True, required=False))))), ('embed', wagtail.wagtailembeds.blocks.EmbedBlock(icon='media')))),
+            field=wagtail.core.fields.StreamField((('text', wagtail.core.blocks.TextBlock(help_text='This text will be formatted with markdown.', icon='pilcrow')), ('image', wagtail.core.blocks.StructBlock((('image', wagtail.images.blocks.ImageChooserBlock()), ('caption', wagtail.core.blocks.CharBlock(blank=True, help_text='This will override the default caption.This text will be formatted with markdown.', null=True, required=False))))), ('embed', wagtail.embeds.blocks.EmbedBlock(icon='media')))),
         ),
     ]
