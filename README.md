@@ -10,9 +10,9 @@ This is a news/magazine/blog backend and template. The design is heavily inspire
 - Activate the virtual environment: `source venv/bin/activate` (deactivate with `deactivate`)
 - Install python packages: `pip3 install wheel; pip3 install -r requirements.txt`
 - Start postgresql (if not already running): `sudo service postgresql start`
-- Create database (`owen_db`):
+- Create database (`tribune_db`):
   - Run as postgres user: `sudo -i -u postgres`
-  - Create database: `createdb owen_db`
+  - Create database: `createdb tribune_db`
   - Get out: `exit`
 - Create configuration file in the root folder of the project called `settings.ini`
 	```
@@ -27,7 +27,7 @@ This is a news/magazine/blog backend and template. The design is heavily inspire
 
 You'll also have to set up a postgres database. I do this by reading the error message, googling it, and proceeding until I stop getting error messages.
 
-In development, static and media files are served from local folders. In production, they will be served from Amazon S3. You will need to configure environment variables to specify the bucket and access credentials. (See `owen/settings/production.py` for details.)
+In development, static and media files are served from local folders. In production, they will be served from Amazon S3. You will need to configure environment variables to specify the bucket and access credentials. (See `tribune/settings/production.py` for details.)
 
 ### Possibly necessary steps (if not previously set up)
 
