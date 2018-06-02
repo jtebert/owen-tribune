@@ -106,7 +106,7 @@ WSGI_APPLICATION = 'tribune.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tribune_db',
+        'NAME': config('DATABASE_NAME', default='tribune_db'),
     }
 }
 
@@ -208,7 +208,16 @@ PRODUCTION = config('PRODUCTION', cast=bool, default=False)
 if PRODUCTION:
     # Parse database configuration from $DATABASE_URL
     import dj_database_url
-    DATABASES['default'] = dj_database_url.config()
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': config('DATABASE_NAME'),
+            'USER': config('DATABASE_USER'),
+            'PASSWORD': config('DATABASE_PASSWORD'),
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     # Allow all host headers
