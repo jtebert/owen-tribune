@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Q
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template.loader import render_to_string
 
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -22,60 +23,11 @@ from wagtail.core import blocks
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtailmedia.blocks import AbstractMediaChooserBlock
 
-# TODO: Add snippets for top/bottom menus: http://jordijoan.me/simple-orderable-menus-wagtail/
 
 md_format_help = 'This text will be formatted with markdown.'
 
-
-'''
-@register_snippet
-class SubjectSnippet(models.Model):
-    """
-    Identifies the different subjects under which to categorize articles
-    """
-    subject_name = models.CharField(max_length=50)
-
-    def __unicode__(self):
-        return self.subject_name
-
-
-
-@register_snippet
-class AuthorSnippet(models.Model):
-    """
-    Create a profile for each author, which will be paired with the articles they write
-    """
-    # NOT USED NOW
-    author_name = models.CharField(max_length=255)
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        null=True,
-        on_delete=models.SET_NULL)
-    portrait = models.ForeignKey(
-        'images.CustomImage',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    bio = models.TextField(max_length=800, null=True)
-    homepage = models.URLField(blank=True)
-
-    panels = [
-        FieldPanel('author_name'),
-        FieldPanel('user'),
-        FieldPanel('bio'),
-        ImageChooserPanel('portrait'),
-        FieldPanel('homepage'),
-    ]
-
-    def __unicode__(self):
-        return self.author_name
-
-    class Meta:
-        verbose_name = "Author"
-'''
 
 class CaptionedImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
@@ -85,7 +37,7 @@ class CaptionedImageBlock(blocks.StructBlock):
     class Meta:
         icon = 'image'
         template = 'blog/captioned_image_block.html'
-        label = 'Image'
+        label = 'Captioned Image'
 
 
 class QuoteBlock(blocks.StructBlock):
@@ -95,6 +47,35 @@ class QuoteBlock(blocks.StructBlock):
     class Meta:
         icon = 'openquote'
         template = 'blog/quote.html'
+
+
+class MediaBlock(AbstractMediaChooserBlock):
+    def render_basic(self, value, context=None):
+        if not value:
+            return ''
+
+        if value.type == 'video':
+            player_code = 'blog/video_block.html'
+        else:
+            player_code = 'blog/audio_block.html'
+
+        if not context:
+            context = {}
+        context['media'] = value
+        return render_to_string(player_code, context)
+
+
+class OptionsMediaBlock(blocks.StructBlock):
+    media = MediaBlock()
+    show_controls = blocks.BooleanBlock(required=False, default=True)
+    autoplay = blocks.BooleanBlock(required=False)
+    loop = blocks.BooleanBlock(required=False)
+    muted = blocks.BooleanBlock(required=False)
+
+    class Meta:
+        icon='media'
+        template= 'blog/media_block.html'
+
 
 '''
 class CodeBlock(blocks.TextBlock):
@@ -132,10 +113,12 @@ class ArticlePage(Page):
         help_text='This will only appear in article previews, not with the full article.'+md_format_help)
     body = StreamField([
         ('text', blocks.TextBlock(icon='pilcrow', help_text=md_format_help)),
-        ('image', CaptionedImageBlock()),
+        ('richtext', blocks.RichTextBlock()),
+        ('captioned_image', CaptionedImageBlock()),
         ('embed', EmbedBlock(icon='media')),
         ('pull_quote', QuoteBlock()),
         ('table', TableBlock(template='blog/table_block.html')),
+        ('media', OptionsMediaBlock()),
     ])
     tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
 

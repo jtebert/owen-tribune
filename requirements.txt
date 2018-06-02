@@ -31,6 +31,7 @@ static3==0.7.0
 Unidecode==0.4.21
 urllib3==1.22
 wagtail==2.1
+wagtailmedia==0.2.0
 wagtailmenus==2.9
 webencodings==0.5.1
 whitenoise==3.2.2

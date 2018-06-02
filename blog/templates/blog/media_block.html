@@ -1,0 +1,18 @@
+<div class="media">
+    <{{ self.media.type }}
+    	{% if self.show_controls %}
+    		controls
+		{% endif %}
+		{% if self.autoplay %}
+			autoplay
+		{% endif %}
+		{% if loop %}
+			loop
+		{% endif %}
+		{% if muted %}
+			muted
+		{% endif %}>
+        <source src="{{ self.media.file.url }}" type="video/mp4">
+        Your browser does not support the {{ self.media.type }} tag.
+	</{{ self.media.type }}>
+</div>

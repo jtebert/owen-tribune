@@ -144,6 +144,7 @@ nav hr {
 
 /**  Article page  **/
 
+video, audio {width: 100%;}
 
 .article-photo {max-width: 100%; height: auto;}
 .article .author-header, .article .subject-header, .article .article-header {text-align: left;}

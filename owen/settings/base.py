@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'compressor',
     'storages',
     'wagtailmenus',
+    'wagtailmedia',
 
     'django.contrib.admin',
     'django.contrib.auth',
