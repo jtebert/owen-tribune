@@ -14,6 +14,13 @@ This is a news/magazine/blog backend and template. The design is heavily inspire
   - Run as postgres user: `sudo -i -u postgres`
   - Create database: `createdb owen_db`
   - Get out: `exit`
+- Create configuration file in the root folder of the project called `settings.ini`
+	```
+	[settings]
+	DEBUG=True
+	SECRET_KEY=ARANDOMKEY
+	```
+	There are additional settings that can be configured for production. (Search for `config(` in settings.py)
 - Run migrations: `python3 manage.py migrate`
 - Create superuser: `python3 manage.py createsuperuser`
 - Run it: `python3 manage.py runserver`

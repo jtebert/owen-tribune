@@ -1,9 +1,11 @@
 *.pyc
 .DS_Store
 *.swp
-/venv/
-/static/
-/media/
+venv/
+static/
+media/
 .env
 local_settings.py
 .idea/
+*.ini
+*.env

@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 from __future__ import absolute_import, unicode_literals
-
+from decouple import config
 import os
+
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -147,7 +148,7 @@ TAG_SPACES_ALLOWED = True
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
+BASE_URL = config('BASE_URL')
 
 # Wagtail settings
 
@@ -156,9 +157,60 @@ WAGTAIL_SITE_NAME = "The Owen Tribune"
 WAGTAILIMAGES_IMAGE_MODEL = 'images.CustomImage'
 
 
-# Use local static files in development (i.e., unless using production.py)
 STATICFILES_LOCATION = 'static'
-STATIC_URL = '/static/'
-
 MEDIAFILES_LOCATION = 'media'
-MEDIA_URL = '/media/'
+
+SECRET_KEY = config('SECRET_KEY')
+
+# Use local storage (default) for static/media instead of AWS
+STORAGE_DEBUG = config('STORAGE_DEBUG', cast=bool, default=True)
+if STORAGE_DEBUG:
+    # Use local static files in development
+    MEDIA_URL = '/media/'
+    STATIC_URL = '/static/'
+else:
+    # AWS
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_HOST = config('AWS_S3_HOST')
+    #AWS_S3_HOST = 's3-us-east-2.amazonaws.com'
+
+    # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
+    # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
+    # This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
+    # We also use it in the next setting.
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+    # Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
+    # you run `collectstatic`).
+
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+
+EMAIL_DEBUG = config('EMAIL_DEBUG', cast=bool, default=True)
+if EMAIL_DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+DEBUG = config('DEBUG', cast=bool)
+if DEBUG:
+    # DEVELOPMENT
+    pass
+else:
+    # PRODUCTION
+    pass
+
+PRODUCTION = config('PRODUCTION', cast=bool, default=False)
+if PRODUCTION:
+    # Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    # Allow all host headers
+    ALLOWED_HOSTS = ['*']
+
