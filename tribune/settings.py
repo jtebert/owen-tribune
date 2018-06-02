@@ -133,10 +133,12 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'static'),
+    os.path.join(PROJECT_DIR, 'tribune', 'static'),
 ]
+print(STATICFILES_DIRS)
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+print(STATIC_ROOT)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -169,11 +171,12 @@ if STORAGE_DEBUG:
     MEDIA_URL = '/media/'
     STATIC_URL = '/static/'
 else:
+    print('USING AWS S3')
     # AWS
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_HOST = config('AWS_S3_HOST')
+    #AWS_S3_HOST = config('AWS_S3_HOST')
     #AWS_S3_HOST = 's3-us-east-2.amazonaws.com'
 
     # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
@@ -202,7 +205,8 @@ if DEBUG:
     pass
 else:
     # PRODUCTION
-    pass
+    # Allow all host headers
+    ALLOWED_HOSTS = ['*']
 
 PRODUCTION = config('PRODUCTION', cast=bool, default=False)
 if PRODUCTION:
@@ -220,6 +224,3 @@ if PRODUCTION:
     }
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    # Allow all host headers
-    ALLOWED_HOSTS = ['*']
-
