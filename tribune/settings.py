@@ -135,10 +135,8 @@ STATICFILES_FINDERS = [
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'tribune', 'static'),
 ]
-print(STATICFILES_DIRS)
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-print(STATIC_ROOT)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -171,18 +169,10 @@ if STORAGE_DEBUG:
     MEDIA_URL = '/media/'
     STATIC_URL = '/static/'
 else:
-    print('USING AWS S3')
     # AWS
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-    #AWS_S3_HOST = config('AWS_S3_HOST')
-    #AWS_S3_HOST = 's3-us-east-2.amazonaws.com'
-
-    # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
-    # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
-    # This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
-    # We also use it in the next setting.
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
     # Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
