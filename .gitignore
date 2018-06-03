@@ -2,8 +2,8 @@
 .DS_Store
 *.swp
 venv/
-static/
-media/
+/static/
+/media/
 .env
 local_settings.py
 .idea/
