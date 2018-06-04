@@ -33,6 +33,12 @@ class CaptionedImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     caption = blocks.CharBlock(help_text='This will override the default caption.'+md_format_help,
                                blank=True, null=True, required=False)
+    image_format = blocks.ChoiceBlock(choices=[
+        ('full-width', 'Full width'),
+        ('centered', 'Medium centered'),
+        ('left', 'Left-aligned'),
+        ('right', 'Right-aligned'),
+    ])
 
     class Meta:
         icon = 'image'
@@ -114,7 +120,6 @@ class ArticlePage(Page):
         max_length=250,
         help_text='This will only appear in article previews, not with the full article.'+md_format_help)
     body = StreamField([
-        #('text', blocks.TextBlock(icon='pilcrow', help_text=md_format_help)),
         ('text', blocks.RichTextBlock()),
         ('captioned_image', CaptionedImageBlock()),
         ('embed', EmbedBlock(icon='media')),

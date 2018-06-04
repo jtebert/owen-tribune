@@ -172,16 +172,13 @@ video, audio {width: 100%;}
     margin-bottom: 0;
 }
 
-.captioned-image figcaption {
-    margin-bottom: 24px;
-}
 .captioned-image figcaption p {
     font-size: 16px;
     font-style: oblique;
     margin-top: 8px;
     margin-bottom: 4px;
 }
-.captioned-image img {max-width: 100%; height: auto;}
+
 .captioned-image .img-source {
     font-family: "Work Sans", sans-serif;
     font-weight: 600;
@@ -202,9 +199,43 @@ video, audio {width: 100%;}
     height: 100%;
 }
 
-.responsive-object, .captioned-image {
+.responsive-object, .captioned-image, img.richtext-image {
     margin-top: 24px;
     margin-bottom: 24px;
+}
+
+.captioned-image img, img.richtext-image.full-width {
+    max-width: 100%;
+    height: auto;
+}
+
+.captioned-image.left, img.richtext-image.left {
+    width: calc(50% - 24px);
+    height: auto;
+    float: left;
+    margin-right: 24px;
+}
+
+.captioned-image.right, img.richtext-image.right {
+    width: calc(50% - 24px);
+    height: auto;
+    float: right;
+    margin-left: 24px;
+}
+
+.captioned-image.centered {
+    width: 75%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 767px) {
+    .captioned-image img, img.richtext-image {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 
 blockquote.pull-quote {

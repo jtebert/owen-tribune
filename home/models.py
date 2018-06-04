@@ -20,7 +20,7 @@ from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 
-from blog.models import ArticlePage, CaptionedImageBlock
+from blog.models import ArticlePage, CaptionedImageBlock, CodeBlock, QuoteBlock, TableBlock, OptionsMediaBlock
 
 
 class HomePage(Page):
@@ -63,9 +63,13 @@ class InfoPage(Page):
     subpage_types = []
 
     body = StreamField([
-        ('text', blocks.TextBlock(icon='pilcrow', help_text='This text will be formatted with markdown.')),
-        ('image', CaptionedImageBlock()),
+        ('text', blocks.RichTextBlock()),
+        ('captioned_image', CaptionedImageBlock()),
         ('embed', EmbedBlock(icon='media')),
+        ('pull_quote', QuoteBlock()),
+        ('table', TableBlock(template='blog/table_block.html')),
+        ('media', OptionsMediaBlock()),
+        ('code', CodeBlock()),
     ])
 
     content_panels = Page.content_panels + [

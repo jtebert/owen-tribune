@@ -13,11 +13,7 @@
 <div class="row">
     <div class="col-md-8 article">
         {% for block in self.body %}
-            {% if block.block_type == 'text' %}
-                {{ block|make_markdown }}
-            {% else %}
-                {{ block }}
-            {% endif %}
+            {{ block }}
         {% endfor %}
     </div>
 </div>
