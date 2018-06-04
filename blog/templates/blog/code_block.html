@@ -1,0 +1,10 @@
+{% load highlight %}
+
+{% filter highlight %}
+<pre
+	{% if self.language %} lang={{ self.language }} {% endif %}
+	{% if self.show_line_numbers %} linenos {% endif %}
+	>
+{{ self.code }}
+</pre>
+{% endfilter %}

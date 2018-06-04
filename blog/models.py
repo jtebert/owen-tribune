@@ -77,13 +77,15 @@ class OptionsMediaBlock(blocks.StructBlock):
         template= 'blog/media_block.html'
 
 
-'''
-class CodeBlock(blocks.TextBlock):
+class CodeBlock(blocks.StructBlock):
+    code = blocks.TextBlock()
+    language = blocks.CharBlock(required=False)
+    show_line_numbers = blocks.BooleanBlock(required=False, default=True)
+
     class Meta:
-        template = 'blog/code_blog.html'
+        template = 'blog/code_block.html'
         icon = 'code'
         label = 'Code'
-'''
 
 
 class ArticlePageTag(TaggedItemBase):
@@ -112,13 +114,14 @@ class ArticlePage(Page):
         max_length=250,
         help_text='This will only appear in article previews, not with the full article.'+md_format_help)
     body = StreamField([
-        ('text', blocks.TextBlock(icon='pilcrow', help_text=md_format_help)),
-        ('richtext', blocks.RichTextBlock()),
+        #('text', blocks.TextBlock(icon='pilcrow', help_text=md_format_help)),
+        ('text', blocks.RichTextBlock()),
         ('captioned_image', CaptionedImageBlock()),
         ('embed', EmbedBlock(icon='media')),
         ('pull_quote', QuoteBlock()),
         ('table', TableBlock(template='blog/table_block.html')),
         ('media', OptionsMediaBlock()),
+        ('code', CodeBlock()),
     ])
     tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
 

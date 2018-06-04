@@ -49,14 +49,7 @@
         <div class="article-content">
 
             <div class="article-body">
-
-                {% for block in self.body %}
-                    {% if block.block_type == 'text' %}
-                        {{ block|make_markdown }}
-                    {% else %}
-                        {{ block }}
-                    {% endif %}
-                {% endfor %}
+                {{ self.body }}
             </div>
 
         </div>
