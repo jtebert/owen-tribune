@@ -1,0 +1,23 @@
+{
+  "name": "tribune",
+  "version": "1.0.0",
+  "description": "*The Owen Tribune, tremendous news source*",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtebert/owen-tribune.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jtebert/owen-tribune/issues"
+  },
+  "homepage": "https://github.com/jtebert/owen-tribune#readme",
+  "dependencies": {
+    "bulma": "^0.7.1",
+    "mdi": "^2.2.43"
+  }
+}

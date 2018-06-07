@@ -10,6 +10,7 @@ Django==2.0.5
 django-appconf==1.0.2
 django-compressor==2.1
 django-modelcluster==4.1
+django-sass-processor==0.7
 django-storages==1.5.1
 django-taggit==0.22.2
 django-toolbelt==0.0.1
@@ -22,6 +23,7 @@ html5lib==0.999999999
 idna==2.6
 jmespath==0.9.3
 l18n==2016.6.4
+libsass==0.14.5
 Markdown==2.6.6
 Pillow==5.0.0
 psycopg2==2.6.2
