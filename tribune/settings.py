@@ -231,7 +231,6 @@ SASS_PROCESSOR_INCLUDE_DIRS = [
     os.path.join(PROJECT_DIR, 'node_modules'),
     os.path.join(PROJECT_DIR, 'extra-styles/scss'),
 ]
-print(SASS_PROCESSOR_INCLUDE_DIRS)
 SASS_PRECISION = 8
 NODE_MODULES_URL = os.path.join(STATIC_URL, 'node_modules')
 SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.sass$'
