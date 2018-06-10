@@ -117,7 +117,7 @@ class ArticlePage(Page):
     )
     date = models.DateField("Post date")
     intro = models.TextField(
-        max_length=250,
+        max_length=480,
         help_text='This will only appear in article previews, not with the full article.'+md_format_help)
     body = StreamField([
         ('text', blocks.RichTextBlock()),

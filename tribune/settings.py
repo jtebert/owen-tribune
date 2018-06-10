@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
+
 from __future__ import absolute_import, unicode_literals
 from decouple import config
 import os
@@ -155,7 +156,7 @@ BASE_URL = config('BASE_URL')
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "The Owen Tribune"
+WAGTAIL_SITE_NAME = config('SITE_NAME', default="Tribune")
 
 WAGTAILIMAGES_IMAGE_MODEL = 'images.CustomImage'
 
@@ -195,7 +196,7 @@ else:
     EMAIL_HOST_USER = config('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
     EMAIL_PORT = config('EMAIL_PORT', cast=int)
-    EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=True) 
+    EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=True)
 
 DEBUG = config('DEBUG', cast=bool)
 if DEBUG:

@@ -3,4 +3,75 @@
 @import "node_modules/bulma/sass/utilities/initial-variables";
 @import "node_modules/bulma/sass/utilities/functions";
 
+$green: #1b7740;
+$green-invert: findColorInvert($green);
+
+
+
+$family-sans-serif: 'Montserrat', sans-serif;
+$family-title: 'Frank Ruhl Libre', serif;
+$family-subtitle: 'Share Tech', sans-serif;
+
+$link: $green;
+$primary: $black-ter;
+
+// Derived variables
+
+@import "node_modules/bulma/sass/utilities/derived-variables";
+
+
+// Custom CSS
+
+@import "node_modules/bulma/sass/utilities/mixins";
+
+.title {
+    font-family: $family-title;
+}
+
+.tabs, .subtitle, .article-subject, .article-info {
+    font-family: $family-subtitle;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero h1.title {
+    display: inline-block;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 100px;
+    border: 5px solid $white;
+    padding: $gap/2 $gap;
+    //padding-top: $gap/2;
+    @include mobile {
+        border-width: 3px;
+        font-size: 15vw;
+        padding: 2vw 4vw;
+
+    }
+}
+
+.card {
+    &.horizontal {
+        display: table;
+        .card-image{
+
+        }
+    }
+    .article-title {
+        @extend .title.is-2;
+        font-family: $family-title;
+        font-weight: 300;
+        margin: 0;
+    }
+    .article-subject {
+        @extend .subtitle.is-6;
+        font-weight: 400;
+    }
+    .article-info {
+        @extend .subtitle.is-6;
+        font-weight: 400;
+    }
+}
+
 @import "node_modules/bulma/bulma"
