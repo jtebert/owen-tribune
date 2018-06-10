@@ -14,6 +14,7 @@ This is a news/magazine/blog backend and template. The design is heavily inspire
   - Run as postgres user: `sudo -i -u postgres`
   - Create database: `createdb tribune_db`
   - Get out: `exit`
+  - If your user doesn't already have a postgres user/role: `sudo -u postgres createuser USERNAME`
 - Create configuration file in the root folder of the project called `settings.ini`
 	```
 	[settings]
