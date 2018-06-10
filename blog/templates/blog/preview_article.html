@@ -1,10 +1,11 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% load make_markdown %}
 
-<div class="card">
-    <div class="card-image">
-        {% image article.main_image fill-600x600 as tmp_photo %}
-        <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}}/>
+<div class="card horizontal">
+    {% image article.main_image fill-600x600 as tmp_photo %}
+    <div class="card-image"
+        style="background-image: url({{ tmp_photo.url }})"
+        {{ tmp_photo.attrs }}>
     </div>
     <div class="card-content">
         <h5 class="article-subject">
@@ -30,7 +31,7 @@
         <h4 class="article-read-more">
             <a href="{{ article.url }}">
                 Read More
-                <div class="icon"><i class="mdi mdi-right-chevron"></i></div>
+                <div class="icon"><i class="mdi mdi-chevron-right mdi-24px"></i></div>
             </a>
         </h4>
     </div>

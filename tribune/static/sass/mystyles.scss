@@ -13,7 +13,7 @@ $family-title: 'Frank Ruhl Libre', serif;
 $family-subtitle: 'Share Tech', sans-serif;
 
 $link: $green;
-$primary: $black-ter;
+$primary: $black-bis;
 
 // Derived variables
 
@@ -32,6 +32,9 @@ $primary: $black-ter;
     font-family: $family-subtitle;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+.tabs a {
+    font-size: 1.5rem;
 }
 
 .hero h1.title {
@@ -52,10 +55,29 @@ $primary: $black-ter;
 }
 
 .card {
+    margin-bottom: $gap/2;
     &.horizontal {
         display: table;
-        .card-image{
-
+        .card-image {
+            display: table-cell;
+            width: 40%;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+        .card-content {
+            display: table-cell;
+        }
+        @include mobile {
+            display: block;
+            .card-image {
+                display: block;
+                width: 100%;
+                padding-bottom: 75%;
+            }
+            .card-content {
+                display: block;
+            }
         }
     }
     .article-title {
@@ -63,6 +85,8 @@ $primary: $black-ter;
         font-family: $family-title;
         font-weight: 300;
         margin: 0;
+        line-height: 1.25;
+        a {color: inherit;}
     }
     .article-subject {
         @extend .subtitle.is-6;
@@ -71,6 +95,19 @@ $primary: $black-ter;
     .article-info {
         @extend .subtitle.is-6;
         font-weight: 400;
+    }
+    .article-read-more {
+        @extend .subtitle.is-6;
+        font-size: 16px;
+        text-transform: uppercase;
+        text-align: right;
+        font-weight: 500;
+        .icon {
+            vertical-align: top;
+        }
+    }
+    .content {
+        margin: 1rem 0;
     }
 }
 
