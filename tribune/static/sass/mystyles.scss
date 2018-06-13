@@ -3,14 +3,21 @@
 @import "node_modules/bulma/sass/utilities/initial-variables";
 @import "node_modules/bulma/sass/utilities/functions";
 
+$article-width: 850px;
+
 $green: #1b7740;
 $green-invert: findColorInvert($green);
 
-
+$size-8: 0.5rem;
 
 $family-sans-serif: 'Montserrat', sans-serif;
 $family-title: 'Frank Ruhl Libre', serif;
 $family-subtitle: 'Share Tech', sans-serif;
+
+$title-weight: $weight-normal;
+$subtitle-weight: $weight-normal;
+
+$content-heading-weight: $weight-normal;
 
 $link: $green;
 $primary: $black-bis;
@@ -19,10 +26,14 @@ $primary: $black-bis;
 
 @import "node_modules/bulma/sass/utilities/derived-variables";
 
+$code-background: $white-ter;
+$code: $text;
+$code-padding: 4px 8px 4px;
 
 // Custom CSS
 
 @import "node_modules/bulma/sass/utilities/mixins";
+
 
 .title {
     font-family: $family-title;
@@ -37,26 +48,36 @@ $primary: $black-bis;
     font-size: 1.5rem;
 }
 
-.hero h1.title {
-    display: inline-block;
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 100px;
-    border: 5px solid $white;
-    padding: $gap/2 $gap;
-    //padding-top: $gap/2;
-    @include mobile {
-        border-width: 3px;
-        font-size: 15vw;
-        padding: 2vw 4vw;
-
+.hero {
+    .title {
+        display: inline-block;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-style: solid;
+        border-color: $white;
+        opacity: .9;
+        &:hover {opacity: 1;}
+    }
+    h2.title {
+        border-width: 2px;
+        padding: $size-3/2 $size-3;
+    }
+    h1.title {
+        font-size: 100px;
+        padding: $gap/2 $gap;
+        border-width: 5px;
+        @include mobile {
+            border-width: 3px;
+            font-size: 15vw;
+            padding: 2vw 4vw;
+        }
     }
 }
 
 .card {
     margin-bottom: $gap/2;
-    &.horizontal {
+    &.is-horizontal {
         display: table;
         .card-image {
             display: table-cell;
@@ -80,35 +101,84 @@ $primary: $black-bis;
             }
         }
     }
-    .article-title {
-        @extend .title.is-2;
-        font-family: $family-title;
-        font-weight: 300;
-        margin: 0;
-        line-height: 1.25;
-        a {color: inherit;}
-    }
-    .article-subject {
-        @extend .subtitle.is-6;
-        font-weight: 400;
-    }
-    .article-info {
-        @extend .subtitle.is-6;
-        font-weight: 400;
-    }
-    .article-read-more {
-        @extend .subtitle.is-6;
-        font-size: 16px;
-        text-transform: uppercase;
-        text-align: right;
-        font-weight: 500;
-        .icon {
-            vertical-align: top;
+    &.is-article-preview {
+        .title {
+            a {color: inherit;}
+            //margin: $size-8 0;
         }
-    }
-    .content {
-        margin: 1rem 0;
     }
 }
 
-@import "node_modules/bulma/bulma"
+.read-more {
+    text-transform: uppercase;
+    text-align: right;
+    font-weight: 500;
+    .icon {
+        vertical-align: top;
+    }
+}
+
+.article {
+    max-width: $article-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    > .title.is-1 {
+        font-size: 4rem;
+        margin-top: -1rem !important;
+        margin-bottom: 2.5rem;
+    }
+
+    .article-intro {
+        font-family: $family-title;
+        font-style: italic;
+        display: block;
+        color: $grey;
+        font-size: 1.3rem;
+        margin: $gap/2 0;
+    }
+
+    .captioned-image {
+        width: 120%;
+        margin-left: -10%;
+    }
+
+    .content {
+        h1, h2, h3, h4, h5, h6 {font-family: $family-title;}
+        h1 {
+            &:first-child {margin-top: 1em}
+        }
+        h2 {
+            font-size: 2.5rem;
+            &:first-child, &:not(:first-child) {margin-top: 1em}
+        }
+        h3 {
+            font-size: 1.75rem;
+            &:first-child, &:not(:first-child) {margin-top: 1em}
+        }
+        h4 {font-size: 1.5rem;}
+        p, .block-table, .block-code {margin-bottom: 1rem;}
+        table {width: auto;}
+    }
+    .block-table, .block-code {
+        overflow-x: auto;
+    }
+    table.highlighttable {
+        border: none;
+        * {
+            border: none;
+        }
+        td {padding: 0;}
+        .linenos pre {padding-right: 0;}
+        .code pre {padding-left: 0;}
+    }
+}
+
+
+
+
+@import "node_modules/bulma/bulma";
+
+body {
+    //line-height: 1.6;
+}

@@ -1,6 +1,6 @@
 {% load wagtailimages_tags make_markdown %}
 
-<figure class="captioned-image {{self.image_format }}">
+<figure class="image is-captioned {{self.image_format }}">
     {% image self.image original %}
     <figcaption>
         {% if self.caption %}

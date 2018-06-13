@@ -2,7 +2,19 @@
 {% load subject_menu %}
 
 {% block content %}
-    {% subject_menu current_page=self %}
+
+    <div class="hero is-primary">
+        <div class="hero-body has-text-centered">
+            <a href="/">
+            <h2 class="title is-2">
+                    {{ request.site.site_name }}
+                </h2>
+            </a>
+        </div>
+        <div class="hero-footer">
+            {% subject_menu current_page=self %}
+        </div>
+    </div>
 
     {% block full-width-content %}
         <div class="container content-wrapper">

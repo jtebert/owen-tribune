@@ -1,46 +1,6 @@
 {% load to_class_name wagtailsettings_tags wagtailcore_tags %}
 {% get_settings %}
 
-
-{% if current_page|to_class_name != "HomePage" %}
-<nav class="navbar is-primary">
-    <div class="container">
-        <div class="navbar-brand">
-                <a class="navbar-item" href="/">
-                    {{ settings.home.GeneralSettings.site_name }}
-                </a>
-                <span class="navbar-burger burger" data-target="navMenu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
-            </div>
-            <div id="navMenu" class="navbar-menu">
-                <div class="navbar-end">
-                    {% for subject in menuitems %}
-                    <a href="{{ subject.url }}" class="navbar-item">{{ subject.title }}</a>
-                    {% endfor %}
-                    <form class="navbar-item" role="search" action="{% url 'search' %}" method="get">
-                        <div class="field has-addons">
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Search">
-                            </div>
-                            <div class="control">
-                                <button class="button" type="submit">
-                                    <span class="icon is-right">
-                                        <i class="mdi mdi-magnify"></i>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</nav>
-
-{% else %}
-
 <nav class="tabs is-centered">
     <div class="container">
         <ul>
@@ -50,6 +10,3 @@
         </ul>
     </div>
 </nav>
-
-{% endif %}
-

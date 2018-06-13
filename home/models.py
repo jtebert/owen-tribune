@@ -163,17 +163,6 @@ def register_strikethrough_feature(features):
 
 @register_setting
 class GeneralSettings(BaseSetting):
-    site_name = models.CharField(
-        max_length=127,
-        help_text='Website name')
-    '''favicon = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        help_text='Icon for site in browsers (Must be .ico file to work)',
-    )'''
     site_tagline = models.CharField(
         max_length=255,
         blank=True,

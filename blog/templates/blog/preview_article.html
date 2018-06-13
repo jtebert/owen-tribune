@@ -1,49 +1,38 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% load make_markdown %}
 
-<div class="card horizontal">
+<div class="card is-horizontal is-article-preview">
     {% image article.main_image fill-600x600 as tmp_photo %}
     <div class="card-image"
         style="background-image: url({{ tmp_photo.url }})"
         {{ tmp_photo.attrs }}>
     </div>
     <div class="card-content">
-        <h5 class="article-subject">
+        <h6 class="subtitle is-6">
             <a href="{{ article.subject.url }}">
                 {{article.subject }}
             </a>
-        </h5>
-        <h2 class="article-title">
+        </h6>
+        <h2 class="title is-2">
             <a href="{{ article.url }}">
                 {{ article.title }}
             </a>
         </h2>
-        <h4 class="article-info">
+        <h6 class="subtitle is-6">
             <span class="article-author">
                 By <a href="{{ article.author.url }}">{{ article.author }}</a>
             </span>
             &emsp;|&emsp;
             {{ article.date }}
-        </h4>
+        </h6>
         <div class="content">
             {{ article.intro | make_markdown }}
         </div>
-        <h4 class="article-read-more">
+        <h6 class="subtitle is-6 read-more">
             <a href="{{ article.url }}">
                 Read More
                 <div class="icon"><i class="mdi mdi-chevron-right mdi-24px"></i></div>
             </a>
-        </h4>
+        </h6>
     </div>
 </div>
-
-{% comment %}
-<div class="col-md-4 notable-article">
-    <h4 class="subject-header"><a href="{{ article.subject.url }}">{{ article.subject }}</a></h4>
-    {% image article.main_image fill-500x350 as tmp_photo %}
-    <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}} class="center-block"/>
-    <h2 class="article-header"><a href="{{ article.url }}">{{ article.title }}</a></h2>
-    <h3 class="author-header">By <a href="{{ article.author.url }}">{{ article.author }}</a></h3>
-    <p class="intro">{{ article.intro }}</p>
-</div>
-{% endcomment %}
