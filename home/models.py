@@ -189,8 +189,6 @@ class GeneralSettings(BaseSetting):
         help_text='Unique ID for Google Custom Search')
 
     panels = [
-        FieldPanel('site_name'),
-        # ImageChooserPanel('favicon'),
         FieldPanel('site_tagline'),
         FieldPanel('site_description'),
         FieldPanel('pagination_count'),

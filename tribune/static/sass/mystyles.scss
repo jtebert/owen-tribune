@@ -3,9 +3,11 @@
 @import "node_modules/bulma/sass/utilities/initial-variables";
 @import "node_modules/bulma/sass/utilities/functions";
 
-$article-width: 850px;
+$body-size: 17px;
 
-$green: #1b7740;
+$article-width: 1000px;
+
+$green: #058E3F;
 $green-invert: findColorInvert($green);
 
 $size-8: 0.5rem;
@@ -28,7 +30,7 @@ $primary: $black-bis;
 
 $code-background: $white-ter;
 $code: $text;
-$code-padding: 4px 8px 4px;
+$code-padding: 3px 6px 3px;
 
 // Custom CSS
 
@@ -107,14 +109,53 @@ $code-padding: 4px 8px 4px;
             //margin: $size-8 0;
         }
     }
+
 }
 
 .read-more {
+    font-family: $family-sans-serif;
+    letter-spacing: 2px;
     text-transform: uppercase;
     text-align: right;
     font-weight: 500;
     .icon {
-        vertical-align: top;
+        vertical-align: middle;
+    }
+}
+
+.image.is-captioned {
+    margin: 0;
+    margin-bottom: 1.5rem;
+    img {display: block;}
+    figcaption {
+        text-align: left;
+        margin-top: 0.5rem;
+        font-size: .85rem;
+        p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+        .img-source {
+            margin-top: 0.25rem;
+            color: $grey-light;
+            font-weight: 500;
+        }
+    }
+    &.left {
+        float: left;
+        margin-right: 1.5rem;
+        width: calc(50% - 1.5rem);
+    }
+    &.right {
+        float: right;
+        margin-right: 1.5rem;
+        width: calc(50% - 1.5rem);
+    }
+    &.centered {
+        width: 750px;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -124,7 +165,7 @@ $code-padding: 4px 8px 4px;
     margin-right: auto;
 
     > .title.is-1 {
-        font-size: 4rem;
+        font-size: 3.25rem;
         margin-top: -1rem !important;
         margin-bottom: 2.5rem;
     }
@@ -138,18 +179,13 @@ $code-padding: 4px 8px 4px;
         margin: $gap/2 0;
     }
 
-    .captioned-image {
-        width: 120%;
-        margin-left: -10%;
-    }
-
     .content {
-        h1, h2, h3, h4, h5, h6 {font-family: $family-title;}
+        h1, h2, h3, h4, h5, h6 {font-family: $family-sans-serif;}
         h1 {
             &:first-child {margin-top: 1em}
         }
         h2 {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             &:first-child, &:not(:first-child) {margin-top: 1em}
         }
         h3 {
@@ -169,8 +205,12 @@ $code-padding: 4px 8px 4px;
             border: none;
         }
         td {padding: 0;}
-        .linenos pre {padding-right: 0;}
-        .code pre {padding-left: 0;}
+        //.linenos pre {padding-right: 0;}
+        //.code pre {padding-left: 0;}
+    }
+
+    .card.is-author p {
+        margin: 0;
     }
 }
 

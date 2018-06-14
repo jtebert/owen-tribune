@@ -2,19 +2,22 @@
 
 <figure class="image is-captioned {{self.image_format }}">
     {% image self.image original %}
-    <figcaption>
-        {% if self.caption %}
-            {{ self.caption|make_markdown }}
-        {% elif self.image.caption %}
-            {{ self.image.caption|make_markdown }}
-        {% endif %}
 
-        {% if self.image.source_url and self.image.source_name %}
-            <a href="{{ self.image.source_url }}" class="img-source">{{ self.image.source_name }}</a>
-        {% elif self.image.source_url %}
-            <a href="{{ self.image.source_url }}" class="img-source">Source</a>
-        {% elif self.image.source_name %}
-            <span  class="img-source">{{ self.image.source_name }}</span>
-        {% endif %}
-    </figcaption>
+    {% if self.caption or self.image.caption or self.image.source_url or self.image.source_name %}
+        <figcaption>
+            {% if self.caption %}
+                {{ self.caption|make_markdown }}
+            {% elif self.image.caption %}
+                {{ self.image.caption|make_markdown }}
+            {% endif %}
+
+            {% if self.image.source_url and self.image.source_name %}
+                <a href="{{ self.image.source_url }}" class="img-source">{{ self.image.source_name }}</a>
+            {% elif self.image.source_url %}
+                <a href="{{ self.image.source_url }}" class="img-source">Source</a>
+            {% elif self.image.source_name %}
+                <span  class="img-source">{{ self.image.source_name }}</span>
+            {% endif %}
+        </figcaption>
+    {% endif %}
 </figure>

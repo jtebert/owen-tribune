@@ -6,8 +6,8 @@
 
 {% block page-content %}
 
-<div class="row">
-    <div class="col-md-12">
+<div class="section">
+    <div class="container">
         <div class="subject-box" id="index-intro">
             <h2 class="subject-header">{{ self.title }}</h2>
             <div class="subject-info">
@@ -17,52 +17,69 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
+<div class="section">
+    <div class="container">
         {% if articles %}
             {% for article in articles %}
-                {% include "blog/article_row.html" %}
+                {% include "blog/preview_article.html" %}
             {% endfor %}
 
-            <div class="pagination">
+            <nav class="pagination is-centered" role="navigation" aria-label="pagination">
                 {% if articles and articles.paginator.num_pages > 1 %}
                     {% if articles.has_previous %}
-                        <a href="?page=1">
-                            <i class="fa fa-angle-double-left"></i>
+                        <a class="pagination-previous" href="?page={{ articles.previous_page_number }}">
+                            Previous
                         </a>
-                        <a href="?page={{ articles.previous_page_number }}">
-                            <i class="fa fa-angle-left"></i>
+                    {% endif %}
+
+                    {% if articles.has_next %}
+                        <a class="pagination-next" href="?page={{ articles.next_page_number }}">
+                            Next
                         </a>
                     {% endif %}
 
                     {% create_page_range articles.paginator.page_range articles.number as page_range %}
 
-                    {% if 1 not in page_range %}
-                        <span>...</span>
-                    {% endif %}
-                    {% for page in page_range %}
-                        {% if page == articles.number %}
-                            <span class="current-page page">{{ page }}</span>
-                        {% else %}
-                            <a href="?page={{ page }}" class="page">{{ page }}</a>
+                    <ul class="pagination-list">
+                        {% if 1 not in page_range %}
+                            <li><a class="pagination-link"
+                                aria-label="Goto page 1"
+                                href="?page=1">
+                                1
+                            </a></li>
+                            <li><span class="pagination-ellipsis">&hellip;</span></li>
                         {% endif %}
-                    {% endfor %}
-                    {% if articles.paginator.num_pages not in page_range %}
-                        <span>...</span>
-                    {% endif %}
 
-                    {% if articles.has_next %}
-                        <a href="?page={{ articles.next_page_number }}">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                        <a href="?page={{ articles.paginator.num_pages }}">
-                            <i class="fa fa-angle-double-right"></i>
-                        </a>
-                    {% endif %}
+                        {% for page in page_range %}
+                            {% if page == articles.number %}
+                            <li><a class="pagination-link is-current"
+                                aria-label="Page {{ page }}"
+                                aria-current="page">
+                                {{ page }}
+                            </a></li>
+                            {% else %}
+                                <li><a class="pagination-link"
+                                    aria-label="Goto page {{ page }}"
+                                    href="?page={{ page }}">
+                                    {{ page }}
+                                </a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if articles.paginator.num_pages not in page_range %}
+                            <li><span class="pagination-ellipsis">&hellip;</span></li>
+                            <li><a class="pagination-link"
+                                aria-label="Goto page {{ articles.paginator.num_pages }}"
+                                href="?page={{ articles.paginator.num_pages }}">
+                                {{ articles.paginator.num_pages }}
+                            </a></li>
+                        {% endif %}
+                    </ul>
                 {% endif %}
-            </div>
+            </nav>
+
         {% else %}
-            <p style="text-align: center">No articles</p>
+            <p class="has-text-centered">No articles</p>
         {% endif %}
     </div>
 </div>
