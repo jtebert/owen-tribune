@@ -3,20 +3,17 @@
 
 {% block content %}
 
-    <div class="hero is-primary">
-        <div class="hero-body has-text-centered">
-            <a href="/">
-            <h2 class="title is-2">
-                    {{ request.site.site_name }}
-                </h2>
-            </a>
-        </div>
-        <div class="hero-footer">
-            {% subject_menu current_page=self %}
-        </div>
+<div class="hero is-primary">
+    <div class="hero-header">
+        {% subject_menu current_page=self %}
     </div>
+</div>
 
-    {% block full-width-content %}
+
+{% block full-width-content %}
+    <div class="section">
         {% block page-content %}{% endblock %}
-    {% endblock %}
+    </div>
+{% endblock %}
+
 {% endblock %}

@@ -7,128 +7,118 @@
 {% block page-content %}
 {% get_settings %}
 
-<div class="section">
-    <div class="article">
-        <h5 class="subtitle is-4"><a href="{{ self.subject.url }}">{{ self.subject }}</a></h5>
-        <h1 class="title is-1">{{ self.title }}</h1>
-        <h5 class="subtitle is-5 article-info">
-            By <a href="{{ self.author.url }}">{{ self.author }}</a>&emsp;|&emsp;{{ self.date }}
-        </h5>
-        <p></p>
+<div class="article">
+    <h5 class="subtitle is-4"><a href="{{ self.subject.url }}">{{ self.subject }}</a></h5>
+    <h1 class="title is-1">{{ self.title }}</h1>
+    <h5 class="subtitle is-5 article-info">
+        By <a href="{{ self.author.url }}">{{ self.author }}</a>&emsp;|&emsp;{{ self.date }}
+    </h5>
+    <p></p>
+</div>
+
+{% if self.main_image %}
+    <div class="container">
+        <figure class="image is-captioned">
+            {% image self.main_image fill-1600x900 class="article-photo" %}
+            <figcaption>
+                {% if self.main_image.caption %}
+                {{ self.main_image.caption|make_markdown }}
+                {% elif self.main_image.caption %}
+                {{ self.main_image.caption|make_markdown }}
+                {% endif %}
+
+                {% if self.main_image.source_url and self.main_image.source_name %}
+                <a href="{{ self.main_image.source_url }}" class="img-source">{{ self.main_image.source_name }}</a>
+                {% elif self.main_image.source_url %}
+                <a href="{{ self.main_image.source_url }}" class="img-source">Source</a>
+                {% elif self.main_image.source_name %}
+                <span class="img-source">{{ self.main_image.source_name }}</span>
+                {% endif %}
+            </figcaption>
+        </figure>
+    </div>
+{% endif %}
+
+<div class="article">
+
+    <div class="article-intro content">{{ self.intro | make_markdown }}</div>
+
+    <nav class="level is-mobile">
+        <div class="level-left">
+            {% for tag in page.tags.all %}
+                <a class="level-item button is-light" href="{% url 'tag_filter' %}?tag={{ tag }}">
+                    {{ tag }}
+                </a>
+            {% endfor %}
+        </div>
+    </nav>
+
+    <hr>
+
+    <div class="content">
+        {{ self.body }}
+        <br>
     </div>
 
-        {% if self.main_image %}
-        <div class="container">
-            <figure class="image is-captioned">
-                {% image self.main_image fill-1600x900 class="article-photo" %}
-                <figcaption>
-                    {% if self.main_image.caption %}
-                    {{ self.main_image.caption|make_markdown }}
-                    {% elif self.main_image.caption %}
-                    {{ self.main_image.caption|make_markdown }}
-                    {% endif %}
+    {% comment %}
+    <div class="level">
+        <a class="icon is-large" href="https://facebook.com/sharer.php?u={{ request.get_host }}{{ request.path }}" rel="nofollow" target="_blank" title="Share on Facebook">
+            <i class="mdi mdi-facebook mdi-36px"></i></a>
 
-                    {% if self.main_image.source_url and self.main_image.source_name %}
-                    <a href="{{ self.main_image.source_url }}" class="img-source">{{ self.main_image.source_name }}</a>
-                    {% elif self.main_image.source_url %}
-                    <a href="{{ self.main_image.source_url }}" class="img-source">Source</a>
-                    {% elif self.main_image.source_name %}
-                    <span class="img-source">{{ self.main_image.source_name }}</span>
-                    {% endif %}
-                </figcaption>
-            </figure>
-        </div>
-        {% endif %}
+        <a class="icon is-large" href="https://plus.google.com/share?url={{ request.get_host }}{{ request.path }}" rel="nofollow" target="_blank" title="Share on Google+">
+            <i class="mdi mdi-google-plus mdi-36px"></i></a>
 
-    <div class="article">
+        <a class="icon is-large" href="http://www.linkedin.com/shareArticle?mini=true&url={{ request.get_host }}{{ request.path }}&title={{ self.title }}&summary={{ self.intro }}&source={{ request.get_host }}" rel="nofollow" target="_blank" title="Share on LinkedIn">
+            <i class="mdi mdi-linkedin mdi-36px"></i></a>
 
-        <div class="article-intro">{{ self.intro | make_markdown }}</div>
+        <a class="icon is-large" href="http://www.reddit.com/submit?url={{ request.get_host }}{{ request.path }}&title={{ self.title }}" rel="nofollow" target="_blank" title="Share on Reddit">
+            <i class="mdi mdi-reddit mdi-36px"></i></a>
 
-        <nav class="level is-mobile">
-            <div class="level-left">
-                {% for tag in page.tags.all %}
-                    <a class="level-item tag is-medium" href="{% pageurl page.subject %}?tag={{ tag }}">
-                        {{ tag }}
-                    </a>
-                {% endfor %}
-            </div>
-        </nav>
+        <a class="icon is-large" href="http://www.tumblr.com/share/link?url={{ request.get_host }}{{ request.path }}&name={[ self.title }}&description={{ self.intro }}" rel="nofollow" target="_blank" title="Share on Tumblr">
+            <i class="mdi mdi-tumblr mdi-36px"></i></a>
 
-        <hr>
+        <a class="icon is-large" href="https://twitter.com/intent/tweet?text={{ self.title }}&url={{ request.get_host }}{{ request.path }}" rel="nofollow" target="_blank" title="Share on Twitter">
+            <i class="mdi mdi-twitter mdi-36px"></i></a>
 
-        <div class="content">
-            {{ self.body }}
-            <br>
-        </div>
+        <!-- TODO: Add back on "related" and "via" when Twitter username defined somewhere -->
+        <!--<a href="https://twitter.com/intent/tweet?text={{ self.title }}&url={{ request.path }}&via={{ site.twitter_username }}&related={{ site.twitter_username }}" rel="nofollow" target="_blank" title="Share on Twitter">
+            <i class="fa fa-twitter fa-2x"></i></a>-->
+    </div>
+    {% endcomment %}
 
-        {% comment %}
-        <div class="level">
-            <a class="icon is-large" href="https://facebook.com/sharer.php?u={{ request.get_host }}{{ request.path }}" rel="nofollow" target="_blank" title="Share on Facebook">
-                <i class="mdi mdi-facebook mdi-36px"></i></a>
-
-            <a class="icon is-large" href="https://plus.google.com/share?url={{ request.get_host }}{{ request.path }}" rel="nofollow" target="_blank" title="Share on Google+">
-                <i class="mdi mdi-google-plus mdi-36px"></i></a>
-
-            <a class="icon is-large" href="http://www.linkedin.com/shareArticle?mini=true&url={{ request.get_host }}{{ request.path }}&title={{ self.title }}&summary={{ self.intro }}&source={{ request.get_host }}" rel="nofollow" target="_blank" title="Share on LinkedIn">
-                <i class="mdi mdi-linkedin mdi-36px"></i></a>
-
-            <a class="icon is-large" href="http://www.reddit.com/submit?url={{ request.get_host }}{{ request.path }}&title={{ self.title }}" rel="nofollow" target="_blank" title="Share on Reddit">
-                <i class="mdi mdi-reddit mdi-36px"></i></a>
-
-            <a class="icon is-large" href="http://www.tumblr.com/share/link?url={{ request.get_host }}{{ request.path }}&name={[ self.title }}&description={{ self.intro }}" rel="nofollow" target="_blank" title="Share on Tumblr">
-                <i class="mdi mdi-tumblr mdi-36px"></i></a>
-
-            <a class="icon is-large" href="https://twitter.com/intent/tweet?text={{ self.title }}&url={{ request.get_host }}{{ request.path }}" rel="nofollow" target="_blank" title="Share on Twitter">
-                <i class="mdi mdi-twitter mdi-36px"></i></a>
-
-            <!-- TODO: Add back on "related" and "via" when Twitter username defined somewhere -->
-            <!--<a href="https://twitter.com/intent/tweet?text={{ self.title }}&url={{ request.path }}&via={{ site.twitter_username }}&related={{ site.twitter_username }}" rel="nofollow" target="_blank" title="Share on Twitter">
-                <i class="fa fa-twitter fa-2x"></i></a>-->
-        </div>
-        {% endcomment %}
-
-        <div class="card is-author">
-            <div class="card-content">
-                <article class="media">
-                    <figure class="media-left">
-                        <p class="image is-96x96">
-                            {% image self.author.portrait fill-192x192 class="author-photo" %}
+    <div class="card is-author">
+        <div class="card-content">
+            <article class="media">
+                <figure class="media-left">
+                    <p class="image is-96x96">
+                        {% image self.author.portrait fill-192x192 class="author-photo" %}
+                    </p>
+                </figure>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong>{{ self.author }}</strong>
+                            {% if self.author.twitter_handle %}
+                                <small>@{{ self.author.twitter_handle }}</small>
+                            {% endif %}
+                            <br>
+                            {{ self.author.short_bio|make_markdown }}
                         </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>{{ self.author }}</strong>
-                                {% if self.author.twitter_handle %}
-                                    <small>@{{ self.author.twitter_handle }}</small>
-                                {% endif %}
-                                <br>
-                                {{ self.author.short_bio|make_markdown }}
-                            </p>
-                        </div>
-                        <h6 class="read-more">
-                            <a href="{{ self.author.url }}">
-                                Read More
-                                <div class="icon"><i class="mdi mdi-chevron-right mdi-24px"></i></div>
-                            </a>
-                        </h6>
                     </div>
-                </article>
-            </div>
+                    <h6 class="read-more">
+                        <a href="{{ self.author.url }}">
+                            Read More
+                            <div class="icon"><i class="mdi mdi-chevron-right mdi-24px"></i></div>
+                        </a>
+                    </h6>
+                </div>
+            </article>
         </div>
-
     </div>
-</div>
 
+    <br>
 
-
-</div>
-
-
-{% if settings.home.GeneralSettings.disqus %}
-<div class="col-md-8">
-    <div class="info-box">
-        <h2 class="info-header">Comments</h2>
+    {% if settings.home.GeneralSettings.disqus %}
         <div id="disqus_thread"></div>
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES * * */
@@ -142,9 +132,7 @@
             })();
         </script>
         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-    </div>
-</div>
-{% endif %}
+    {% endif %}
 
 </div>
 

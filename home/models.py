@@ -183,10 +183,6 @@ class GeneralSettings(BaseSetting):
         max_length=127,
         blank=True, null=True,
         help_text='Google Analytics Tracking ID')
-    google_custom_search_key = models.CharField(
-        max_length=127,
-        blank=True, null=True,
-        help_text='Unique ID for Google Custom Search')
 
     panels = [
         FieldPanel('site_tagline'),
@@ -194,5 +190,4 @@ class GeneralSettings(BaseSetting):
         FieldPanel('pagination_count'),
         FieldPanel('disqus'),
         FieldPanel('google_analytics_id'),
-        FieldPanel('google_custom_search_key'),
     ]

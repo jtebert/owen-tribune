@@ -7,6 +7,8 @@ $body-size: 17px;
 
 $article-width: 1000px;
 
+$navbar-height: 10rem;
+
 $green: #058E3F;
 $green-invert: findColorInvert($green);
 
@@ -24,6 +26,8 @@ $content-heading-weight: $weight-normal;
 $link: $green;
 $primary: $black-bis;
 
+$fade-dur: 0.5s;
+
 // Derived variables
 
 @import "node_modules/bulma/sass/utilities/derived-variables";
@@ -36,6 +40,16 @@ $code-padding: 3px 6px 3px;
 
 @import "node_modules/bulma/sass/utilities/mixins";
 
+a {
+    -o-transition: $fade-dur;
+    -ms-transition: $fade-dur;
+    -moz-transition: $fade-dur;
+    -webkit-transition: $fade-dur;
+    transition: $fade-dur;
+}
+.content {
+    a:hover {text-decoration: underline;}
+}
 
 .title {
     font-family: $family-title;
@@ -46,31 +60,32 @@ $code-padding: 3px 6px 3px;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
-.tabs a {
-    font-size: 1.5rem;
-}
 
 .hero {
     .title {
         display: inline-block;
         font-weight: 300;
         text-transform: uppercase;
-        letter-spacing: 2px;
-        border-style: solid;
-        border-color: $white;
+        letter-spacing: 3px;
         opacity: .9;
+        &.is-boxed {
+            border-style: solid;
+            border-color: $primary-invert;
+        }
         &:hover {opacity: 1;}
     }
-    h2.title {
+    .title.is-2.is-boxed {
         border-width: 2px;
-        padding: $size-3/2 $size-3;
+        padding: 0.75rem 1.5rem;
     }
-    h1.title {
+    .title.is-0 {
         font-size: 100px;
-        padding: $gap/2 $gap;
-        border-width: 5px;
-        @include mobile {
+        &.is-boxed{
+            padding: $gap/2 $gap;
             border-width: 3px;
+        }
+        @include mobile {
+            border-width: 2px;
             font-size: 15vw;
             padding: 2vw 4vw;
         }
@@ -98,14 +113,12 @@ $code-padding: 3px 6px 3px;
                 width: 100%;
                 padding-bottom: 75%;
             }
-            .card-content {
-                display: block;
-            }
         }
     }
     &.is-article-preview {
         .title {
             a {color: inherit;}
+            a:hover {color: $link;}
             //margin: $size-8 0;
         }
     }

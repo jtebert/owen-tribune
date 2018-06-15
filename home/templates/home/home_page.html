@@ -11,7 +11,7 @@
 <section class="hero is-primary is-medium">
   <div class="hero-body has-text-centered">
     <div class="container">
-      <h1 class="title">
+      <h1 class="title is-boxed is-0">
         {{ request.site.site_name }}
       </h1>
     </div>
@@ -45,12 +45,14 @@
 {% endcomment %}
 
 <section class="section">
-  <div class="column is-8 is-offset-2">
-    {% for a in self.preview_articles.all %}
-      {% with a.article as article %}
-        {% include "blog/preview_article.html" %}
-      {% endwith %}
-    {% endfor %}
+  <div class="columns">
+    <div class="column is-8 is-offset-2">
+      {% for a in self.preview_articles.all %}
+        {% with a.article as article %}
+          {% include "blog/preview_article.html" %}
+        {% endwith %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 

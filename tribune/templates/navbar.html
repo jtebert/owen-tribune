@@ -1,12 +1,31 @@
 {% load to_class_name wagtailsettings_tags wagtailcore_tags %}
 {% get_settings %}
 
-<nav class="tabs is-centered">
-    <div class="container">
-        <ul>
-        {% for subject in menuitems %}
-            <li><a href="{{ subject.url }}">{{ subject.title }}</a></li>
-        {% endfor %}
-        </ul>
-    </div>
-</nav>
+{% if current_page|to_class_name != "HomePage" %}
+    <nav class="navbar is-transparent">
+        <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/"><h2 class="title is-2 is-boxed">
+                {{ request.site.site_name }}
+            </h2></a>
+        </div>
+            <div class="navbar-end">
+                <nav class="tabs is-large">
+                    {% for subject in menuitems %}
+                        <a href="{{ subject.url }}">{{ subject.title }}</a>
+                    {% endfor %}
+                </nav>
+            </div>
+        </div>
+    </nav>
+{% else %}
+    <nav class="tabs is-centered is-large">
+        <div class="container">
+            <ul>
+                {% for subject in menuitems %}
+                    <li><a href="{{ subject.url }}">{{ subject.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+{% endif %}
