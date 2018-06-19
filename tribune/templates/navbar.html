@@ -14,6 +14,7 @@
                     {% for subject in menuitems %}
                         <a href="{{ subject.url }}">{{ subject.title }}</a>
                     {% endfor %}
+                    <a href="{% url 'search' %}">Search</a>
                 </nav>
             </div>
         </div>
@@ -25,6 +26,7 @@
                 {% for subject in menuitems %}
                     <li><a href="{{ subject.url }}">{{ subject.title }}</a></li>
                 {% endfor %}
+                <a href="{% url 'search' %}">Search</a>
             </ul>
         </div>
     </nav>

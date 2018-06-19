@@ -10,33 +10,35 @@ Search
 
 {% block page-content %}
 
-<section class="section">
-    <div class="columns">
-        <div class="column is-8 is-offset-2">
+<div class="hero is-light">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="column is-8-desktop is-offset-2-desktop">
 
-            <form action="{% url 'search' %}" method="get" id="search-form">
-                <div class="field has-addons is-horizonal">
-                    <div class="control is-expanded">
-                        <input type="text"
-                            class="input is-large"
-                            name="query"
-                            {% if search_query %} value="{{ search_query }}"{% endif %}>
+                <form action="{% url 'search' %}" method="get" id="search-form">
+                    <div class="field has-addons is-horizonal">
+                        <div class="control is-expanded">
+                            <input type="text"
+                                class="input is-large"
+                                name="query"
+                                {% if search_query %} value="{{ search_query }}"{% endif %}>
+                        </div>
+                        <div class="control">
+                            <a type="submit"
+                                value="Search"
+                                class="button is-link is-large"
+                                onclick="document.getElementById('search-form').submit();">
+                                <span class="icon is-small is-left">
+                                    <i class="mdi mdi-magnify"></i>
+                                </span>
+                            </a>
+                        </div>
                     </div>
-                    <div class="control">
-                        <a type="submit"
-                            value="Search"
-                            class="button is-link is-large"
-                            onclick="document.getElementById('search-form').submit();">
-                            <span class="icon is-small is-left">
-                                <i class="mdi mdi-magnify"></i>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
 
 <section class="section">

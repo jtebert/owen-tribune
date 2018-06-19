@@ -45,6 +45,16 @@ $navbar-item-hover-background-color: $link;
 
 @import "node_modules/bulma/sass/utilities/mixins";
 
+body {
+    // For sticky footer
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+#sticky-wrapper {
+    flex: 1;
+}
+
 a {
     -o-transition: $fade-dur;
     -ms-transition: $fade-dur;
@@ -68,7 +78,6 @@ a {
 
 .hero {
     .title {
-        display: inline-block;
         //font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 3px;
@@ -85,6 +94,7 @@ a {
     }
     .title.is-0 {
         font-size: 100px;
+        display: inline-block;
         &.is-boxed{
             padding: $gap/2 $gap;
             border-width: 8px;
@@ -113,6 +123,7 @@ a {
 }
 
 .card {
+    width: 100%;
     margin-bottom: $gap/2;
     &.is-horizontal {
         display: table;
@@ -206,7 +217,7 @@ a {
 
     .article-intro {
         font-family: $family-title;
-        font-style: italic;
+        //font-style: italic;
         display: block;
         color: $grey;
         font-size: 1.3rem;
@@ -245,6 +256,14 @@ a {
 
     .card.is-author p {
         margin: 0;
+    }
+}
+
+.footer .nav.is-flat {
+    .subtitle {
+        display: inline-block;
+        margin: 1.5rem;
+        margin-top: 0;
     }
 }
 
