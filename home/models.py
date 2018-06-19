@@ -51,7 +51,9 @@ class HomePage(Page):
         verbose_name = "Homepage"
 
     def latest_articles(self):
-        articles = ArticlePage.objects.live().exclude(pk=self.featured_article.pk)
+        articles = ArticlePage.objects.live()
+        if self.featured_article:
+             articles.exclude(pk=self.featured_article.pk)
         articles = articles.order_by('-date')
         return articles[0:5]
 
