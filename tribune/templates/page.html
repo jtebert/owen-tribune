@@ -2,11 +2,13 @@
 {% load subject_menu %}
 
 {% block content %}
-    {% subject_menu current_page=self %}
 
-    {% block full-width-content %}
-        <div class="container content-wrapper">
-            {% block page-content %}{% endblock %}
-        </div>
-    {% endblock %}
+<div class="hero is-primary">
+    <div class="hero-header">
+        {% subject_menu current_page=self %}
+    </div>
+</div>
+
+{% block page-content %}{% endblock %}
+
 {% endblock %}

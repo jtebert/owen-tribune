@@ -1,0 +1,283 @@
+// Import initial variables
+
+@import "node_modules/bulma/sass/utilities/initial-variables";
+@import "node_modules/bulma/sass/utilities/functions";
+
+$body-size: 17px;
+
+$article-width: 1000px;
+
+$navbar-height: 10rem;
+
+$green: #069E2D;
+$green-invert: findColorInvert($green);
+
+$size-8: 0.5rem;
+
+$family-sans-serif: 'Montserrat', sans-serif;
+$family-title: 'Montserrat', 'Frank Ruhl Libre', serif;
+$family-subtitle: 'Share Tech', sans-serif;
+
+$title-weight: 500;
+$subtitle-weight: $weight-normal;
+
+$content-heading-weight: $weight-normal;
+
+$link: $green;
+$primary: $black-bis;
+
+$fade-dur: 0.5s;
+
+
+
+// Derived variables
+
+@import "node_modules/bulma/sass/utilities/derived-variables";
+
+$code-background: $white-ter;
+$code: $text;
+$code-padding: 3px 6px 3px;
+
+$navbar-item-hover-background-color: $link;
+
+
+// Custom CSS
+
+@import "node_modules/bulma/sass/utilities/mixins";
+
+body {
+    // For sticky footer
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+#sticky-wrapper {
+    flex: 1;
+}
+
+a {
+    -o-transition: $fade-dur;
+    -ms-transition: $fade-dur;
+    -moz-transition: $fade-dur;
+    -webkit-transition: $fade-dur;
+    transition: $fade-dur;
+}
+.content {
+    a:hover {text-decoration: underline;}
+}
+
+.title {
+    font-family: $family-title;
+}
+
+.tabs, .subtitle, .article-subject, .article-info {
+    font-family: $family-subtitle;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero {
+    .title {
+        //font-weight: 500;
+        letter-spacing: 3px;
+        opacity: .9;
+        &.is-boxed {
+            text-transform: uppercase;
+            border-style: solid;
+            border-color: $primary-invert;
+        }
+        &:hover {opacity: 1;}
+    }
+    .title.is-2.is-boxed {
+        border-width: 4px;
+        padding: 0.75rem 1.5rem;
+    }
+    .title.is-0 {
+        font-size: 100px;
+        display: inline-block;
+        &.is-boxed{
+            padding: $gap/2 $gap;
+            border-width: 8px;
+            @include mobile {
+                border-width: 4px;
+                font-size: 10vw;
+                padding: 2vw 4vw;
+            }
+        }
+    }
+
+    &.is-light .is-article-preview {
+        a:not(.button):not(.dropdown-item):not(.tag) {
+            color: $link;
+            &:hover {color: inherit;}
+        }
+        .title a:not(.button):not(.dropdown-item):not(.tag) {
+            color: inherit;
+            &:hover {color: $link;}
+        }
+    }
+
+    &.is-primary .is-article-preview .subtitle {
+        a {color: $link;}
+    }
+}
+
+.card {
+    width: 100%;
+    margin-bottom: $gap/2;
+    &.is-horizontal {
+        display: table;
+        .card-image {
+            display: table-cell;
+            width: 40%;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+        .card-content {
+            display: table-cell;
+        }
+        @include mobile {
+            display: block;
+            .card-image {
+                display: block;
+                width: 100%;
+                padding-bottom: 75%;
+            }
+        }
+    }
+
+}
+
+.is-article-preview {
+    .title {
+        a {color: inherit;}
+        a:hover {color: $link;}
+        //margin: $size-8 0;
+    }
+}
+
+.read-more {
+    font-family: $family-sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: right;
+    font-weight: 500;
+    .icon {
+        vertical-align: middle;
+    }
+}
+
+.image.is-captioned {
+    margin: 0;
+    margin-bottom: 1.5rem;
+    img {display: block;}
+    figcaption {
+        text-align: left;
+        margin-top: 0.5rem;
+        font-size: .85rem;
+        p {
+            margin-bottom: 0;
+            //font-style: italic;
+        }
+        .img-source {
+            margin-top: 0.25rem;
+            color: $grey-light;
+            font-weight: 500;
+        }
+    }
+    &.left {
+        float: left;
+        margin-right: 1.5rem;
+        width: calc(50% - 1.5rem);
+    }
+    &.right {
+        float: right;
+        margin-right: 1.5rem;
+        width: calc(50% - 1.5rem);
+    }
+    &.centered {
+        width: 750px;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.article {
+    max-width: $article-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    > .title.is-1 {
+        font-size: 3.25rem;
+        margin-top: -1rem !important;
+        margin-bottom: 2.5rem;
+    }
+
+    .article-intro {
+        font-family: $family-title;
+        //font-style: italic;
+        display: block;
+        color: $grey;
+        font-size: 1.3rem;
+        margin: $gap/2 0;
+    }
+
+    .content {
+        h1, h2, h3, h4, h5, h6 {font-family: $family-sans-serif;}
+        h1 {
+            &:first-child {margin-top: 1em}
+        }
+        h2 {
+            font-size: 2.25rem;
+            &:first-child, &:not(:first-child) {margin-top: 1em}
+        }
+        h3 {
+            font-size: 1.75rem;
+            &:first-child, &:not(:first-child) {margin-top: 1em}
+        }
+        h4 {font-size: 1.5rem;}
+        p, .block-table, .block-code {margin-bottom: 1rem;}
+        table {width: auto;}
+    }
+    .block-table, .block-code {
+        overflow-x: auto;
+    }
+    table.highlighttable {
+        border: none;
+        * {
+            border: none;
+        }
+        td {padding: 0;}
+        //.linenos pre {padding-right: 0;}
+        //.code pre {padding-left: 0;}
+    }
+
+    .card.is-author p {
+        margin: 0;
+    }
+}
+
+.title.is-error-num {
+    display: block;
+    font-size: 30vw;
+    letter-spacing: 0;
+}
+
+.footer .nav.is-flat {
+    .subtitle {
+        display: inline-block;
+        margin: 1.5rem;
+        margin-top: 0;
+    }
+}
+
+
+
+
+@import "node_modules/bulma/bulma";
+
+body {
+    //line-height: 1.6;
+}

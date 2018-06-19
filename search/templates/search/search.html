@@ -1,50 +1,54 @@
-{% extends "page.html" %}
+{% extends "hero_page.html" %}
 {% load wagtailcore_tags %}
 {% load static from staticfiles %}
 
-{% block body_class %}template-searchresults{% endblock %}
-
 {% block title %}Search{% endblock %}
+
+{% block page_title %}
+Search
+{% endblock page_title %}
 
 {% block page-content %}
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="subject-box" id="index-intro">
-            <h2 class="subject-header">Search</h2>
+<div class="hero is-light">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="column is-8-desktop is-offset-2-desktop">
+
+                <form action="{% url 'search' %}" method="get" id="search-form">
+                    <div class="field has-addons is-horizonal">
+                        <div class="control is-expanded">
+                            <input type="text"
+                                class="input is-large"
+                                name="query"
+                                {% if search_query %} value="{{ search_query }}"{% endif %}>
+                        </div>
+                        <div class="control">
+                            <a type="submit"
+                                value="Search"
+                                class="button is-link is-large"
+                                onclick="document.getElementById('search-form').submit();">
+                                <span class="icon is-small is-left">
+                                    <i class="mdi mdi-magnify"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <form action="{% url 'search' %}" method="get" class="form-inline search">
-            <input type="text" class="form-control" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-            <input type="submit" value="Search" class="btn btn-default">
-        </form>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-12">
-        {% if search_results %}
-            {% for article in search_results %}
-                {% include "blog/article_row.html" %}
-            {% endfor %}
+<section class="section">
 
-            {% if search_results.has_previous %}
-                <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
-            {% endif %}
+    {% if search_results %}
+        {% include "blog/preview_articles.html" with articles=search_results %}
+    {% elif search_query %}
+        <p style="text-align: center">No articles found</p>
+    {% endif %}
 
-            {% if search_results.has_next %}
-                <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-            {% endif %}
-        {% elif search_query %}
-        <hr/>
-
-            <p style="text-align: center">No articles found</p>
-        {% endif %}
-    </div>
-</div>
+</section>
 
 {% endblock %}

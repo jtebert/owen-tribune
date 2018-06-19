@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
+
 from __future__ import absolute_import, unicode_literals
 from decouple import config
 import os
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     'storages',
     'wagtailmenus',
     'wagtailmedia',
+    'sass_processor',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -130,10 +132,12 @@ USE_TZ = True
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
 ]
 
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'tribune', 'static'),
+    ('node_modules', os.path.join(PROJECT_DIR, 'node_modules'))
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -152,7 +156,7 @@ BASE_URL = config('BASE_URL')
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "The Owen Tribune"
+WAGTAIL_SITE_NAME = config('SITE_NAME', default="Tribune")
 
 WAGTAILIMAGES_IMAGE_MODEL = 'images.CustomImage'
 
@@ -192,7 +196,7 @@ else:
     EMAIL_HOST_USER = config('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
     EMAIL_PORT = config('EMAIL_PORT', cast=int)
-    EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=True) 
+    EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=True)
 
 DEBUG = config('DEBUG', cast=bool)
 if DEBUG:
@@ -219,3 +223,14 @@ if PRODUCTION:
     }
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# Django-sass-processor settings
+SASS_PROCESSOR_ROOT = STATIC_ROOT
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(PROJECT_DIR, 'node_modules'),
+    os.path.join(PROJECT_DIR, 'extra-styles/scss'),
+]
+SASS_PRECISION = 8
+NODE_MODULES_URL = os.path.join(STATIC_URL, 'node_modules')
+SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.sass$'

@@ -1,0 +1,37 @@
+{% extends "hero_page.html" %}
+
+{% block title %}
+    Tagged: {{ tag_query }}
+{% endblock %}
+
+{% block page_title %}
+    {% if tag_query %}
+        {{ tag_query }}
+    {% else %}
+        Tags
+    {% endif %}
+{% endblock page_title %}
+
+{% block page_subtitle %}
+    Tagged Articles
+{% endblock page_subtitle %}
+
+{% block page-content %}
+
+<div class="hero is-light">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            {% for tag in tags %}
+                <a class="button" href="{% url 'tag_filter' %}?tag={{ tag }}">
+                    {{ tag }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<section class="section">
+    {% include "blog/preview_articles.html" with articles=filter_results %}
+</section>
+
+{% endblock page-content %}

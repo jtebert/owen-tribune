@@ -1,21 +1,16 @@
-{% extends "page.html" %}
+{% extends "hero_page.html" %}
 {% load make_markdown %}
 
 {% block page-content %}
 
-<div class="row">
-    <div class="col-md-12 article">
-        <h2 class="article-header">{{ self.title }}</h2>
-        <hr/>
-    </div>
-</div>
+<section class="section">
 
-<div class="row">
-    <div class="col-md-8 article">
+    <div class="article content">
         {% for block in self.body %}
             {{ block }}
         {% endfor %}
     </div>
-</div>
+
+</section>
 
 {% endblock %}

@@ -1,6 +1,7 @@
 {% load wagtailuserbar wagtailcore_tags wagtailsettings_tags menu_tags %}
 {% load static from staticfiles %}
 {% get_settings %}
+{% load sass_tags %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -19,6 +20,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <!-- Latest compiled and minified CSS -->
+    <link href="{% sass_src 'sass/mystyles.scss' %}" rel="stylesheet"
+    type="text/css">
+    <link href="{% sass_src 'sass/syntax.scss' %}" rel="stylesheet" type="text/css">
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'css/syntax.css' %}">-->
+    <link rel="shortcut icon" type="image/png" href="{% static 'imgs/favicon.ico' %}"/>
+    <!-- TODO: Replace with local/NPM -->
+    <link href="{% static 'node_modules/mdi/css/materialdesignicons.min.css' %}"
+    media="all" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre:300,400,400i|Montserrat:400,500,700|Share+Tech" rel="stylesheet">
+
+    {% block extra_css %}
+    {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+
+<div id="sticky-wrapper">
+    {% block content %}{% endblock %}
+</div>
+
+{% block footer %}
+    <footer class="footer">
+        <div class="container has-text-centered">
+            {% flat_menu 'footer_menu' %}
+            <div class="content has-text-centered">
+            <p>
+                <strong>{{ request.site.site_name }}</strong> by
+                {% with settings.home.GeneralSettings as gs %}
+                    {% if gs.site_author and gs.site_author_link %}
+                        <a href="{{ gs.site_author_link }}">{{ gs.site_author }}</a>
+                    {% elif gs.site_author %}
+                        {{ gs.site_author }}
+                    {% endif %}
+                {% endwith %}
+            </p>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+
+<!-- Core JavaSript -->
+<script src="{% static 'js/tribune.js' %}"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        CommonHTML: { linebreaks: { automatic: true } },
+        "HTML-CSS": { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+    });
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+{% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+{% endblock %}
+
+{% wagtailuserbar %}
+</body>
+</html>
+
+
+{% comment %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Latest compiled and minified CSS -->
+
+    <link href="{% sass_src 'sass/mystyles.scss' %}" rel="stylesheet" type="text/css">
+    {# <link href="{% sass_src 'node_modules/bulma/bulma.sass' %}" rel="stylesheet" type="text/css"> #}
 
     {# Global stylesheets #}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-custom.css' %}">
@@ -94,3 +180,4 @@
 
 </body>
 </html>
+{% endcomment %}

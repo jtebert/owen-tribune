@@ -9,3 +9,5 @@ local_settings.py
 .idea/
 *.ini
 *.env
+node_modules/
+.vscode/

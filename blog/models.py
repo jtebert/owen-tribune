@@ -11,22 +11,33 @@ from taggit.models import TaggedItemBase
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import StreamField
 from wagtail.admin.edit_handlers import (FieldPanel,
-                                                InlinePanel,
-                                                MultiFieldPanel,
-                                                PageChooserPanel,
-                                                StreamFieldPanel)
+                                         InlinePanel,
+                                         MultiFieldPanel,
+                                         PageChooserPanel,
+                                         StreamFieldPanel)
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.contrib.table_block.blocks import TableBlock
-from wagtail.core import blocks
+from wagtail.core import blocks, hooks
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtailmedia.blocks import AbstractMediaChooserBlock
 
+import wagtail.admin.rich_text.editors.draftail.features as draftail_features
+from wagtail.admin.rich_text.converters.html_to_contentstate import InlineStyleElementHandler
+
 
 md_format_help = 'This text will be formatted with markdown.'
+DEFAULT_RICHTEXT_FEATURES = [
+    'h2', 'h3', 'h4', 'h5',
+    'bold', 'italic', 'strikethrough', 'code',
+    'ol', 'ul',
+    'hr',
+    'link',
+    'document-link',
+]
 
 
 class CaptionedImageBlock(blocks.StructBlock):
@@ -79,8 +90,8 @@ class OptionsMediaBlock(blocks.StructBlock):
     muted = blocks.BooleanBlock(required=False)
 
     class Meta:
-        icon='media'
-        template= 'blog/media_block.html'
+        icon = 'media'
+        template = 'blog/media_block.html'
 
 
 class CodeBlock(blocks.StructBlock):
@@ -99,7 +110,7 @@ class ArticlePageTag(TaggedItemBase):
 
 
 class ArticlePage(Page):
-    parent_page_types = ["ArticleIndexPage",]
+    parent_page_types = ["ArticleIndexPage", ]
     subpage_types = []
 
     author = models.ForeignKey(
@@ -117,10 +128,10 @@ class ArticlePage(Page):
     )
     date = models.DateField("Post date")
     intro = models.TextField(
-        max_length=250,
+        max_length=480,
         help_text='This will only appear in article previews, not with the full article.'+md_format_help)
     body = StreamField([
-        ('text', blocks.RichTextBlock()),
+        ('text', blocks.RichTextBlock(features=DEFAULT_RICHTEXT_FEATURES)),
         ('captioned_image', CaptionedImageBlock()),
         ('embed', EmbedBlock(icon='media')),
         ('pull_quote', QuoteBlock()),
@@ -141,7 +152,7 @@ class ArticlePage(Page):
 
     search_fields = Page.search_fields + [
         index.SearchField('body'),
-        #index.SearchField('tags__name'),
+        # index.SearchField('tags__name'),
     ]
 
     class Meta:
@@ -174,7 +185,8 @@ class ArticlePage(Page):
 
 
 class SourceLink(models.Model):
-    title = models.TextField(max_length=1023, help_text=md_format_help+"Use a standard citation format.", blank=True, null=True)
+    title = models.TextField(max_length=1023, help_text=md_format_help +
+                             "Use a standard citation format.", blank=True, null=True)
     url = models.URLField('Link to Source', blank=True, null=True)
 
     panels = [
@@ -284,7 +296,8 @@ class ArticleIndexPage(Page):
         """
         articles = ArticlePage.objects.live().descendant_of(self)
         if subject_filter is not None:
-            articles = articles.filter(Q(subject_1=subject_filter) | Q(subject_2=subject_filter))
+            articles = articles.filter(
+                Q(subject_1=subject_filter) | Q(subject_2=subject_filter))
         articles = articles.order_by('-date')
         return articles
 
@@ -371,7 +384,6 @@ class AuthorPage(Page):
         max_length=15,
         null=True, blank=True)
 
-
     content_panels = [
         FieldPanel('title'),
         FieldPanel('user'),
@@ -386,7 +398,7 @@ class AuthorPage(Page):
         Get all articles by this author
         :return: QuerySet of ArticlePages
         """
-        return ArticlePage.objects.live().filter(author=self).order_by('title')
+        return ArticlePage.objects.live().filter(author=self).order_by('-date')
 
     def __unicode__(self):
         return self.title
@@ -417,4 +429,4 @@ class AuthorIndexPage(Page):
     def can_create_at(cls, parent):
         # You can only create one of these!
         return super(AuthorIndexPage, cls).can_create_at(parent) \
-               and not cls.objects.exists()
+            and not cls.objects.exists()

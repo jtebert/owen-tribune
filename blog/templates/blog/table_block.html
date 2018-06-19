@@ -1,4 +1,7 @@
-<table class="table">
+<table class="table
+    {% if data.0|length > 5 %}
+        is-narrow
+    {% endif %}">
     {% if table_header %}
         <thead>
         <tr>

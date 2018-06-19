@@ -1,20 +1,17 @@
 {% extends "page.html" %}
 
-{% block body_class %}template-404{% endblock %}
-
 {% block page-content %}
 
-<div class="row">
-    <div class="col-md-12 article">
-        <h2 class="article-header">Page not found</h2>
-        <hr/>
-    </div>
-</div>
+<section class="section">
 
-<div class="row">
-    <div class="col-md-8 article">
-        <h2>Sorry, this page could not be found.</h2>
+    <div class="container has-text-centered">
+        <h1 class="title is-error-num">404</h1>
+        <h2 class="title is-1">Page not found</h2>
+        <p class="content">Oops, this page could not be found. There's a strong
+        possibility that you ended up here because of a mistake that I
+        made. I'm sorry.</p>
     </div>
-</div>
+
+</section>
 
 {% endblock %}
