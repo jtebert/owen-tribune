@@ -4,8 +4,11 @@
 
 {% block body_class %}template-blogpage{% endblock %}
 
-{% block page-content %}
 {% get_settings %}
+
+{% block page-content %}
+
+<section class="section">
 
 <div class="article">
     <h5 class="subtitle is-4"><a href="{{ self.subject.url }}">{{ self.subject }}</a></h5>
@@ -22,17 +25,17 @@
             {% image self.main_image fill-1600x900 class="article-photo" %}
             <figcaption>
                 {% if self.main_image.caption %}
-                {{ self.main_image.caption|make_markdown }}
+                    {{ self.main_image.caption|make_markdown }}
                 {% elif self.main_image.caption %}
-                {{ self.main_image.caption|make_markdown }}
+                    {{ self.main_image.caption|make_markdown }}
                 {% endif %}
 
                 {% if self.main_image.source_url and self.main_image.source_name %}
-                <a href="{{ self.main_image.source_url }}" class="img-source">{{ self.main_image.source_name }}</a>
+                    <a href="{{ self.main_image.source_url }}" class="img-source">{{ self.main_image.source_name }}</a>
                 {% elif self.main_image.source_url %}
-                <a href="{{ self.main_image.source_url }}" class="img-source">Source</a>
+                    <a href="{{ self.main_image.source_url }}" class="img-source">Source</a>
                 {% elif self.main_image.source_name %}
-                <span class="img-source">{{ self.main_image.source_name }}</span>
+                    <span class="img-source">{{ self.main_image.source_name }}</span>
                 {% endif %}
             </figcaption>
         </figure>
@@ -135,5 +138,6 @@
     {% endif %}
 
 </div>
+</section>
 
 {% endblock %}

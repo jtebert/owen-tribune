@@ -10,41 +10,43 @@ Search
 
 {% block page-content %}
 
-<div class="columns">
-    <div class="column is-8 is-offset-2">
+<section class="section">
+    <div class="columns">
+        <div class="column is-8 is-offset-2">
 
-        <form action="{% url 'search' %}" method="get" id="search-form">
-            <div class="field has-addons is-horizonal">
-                <div class="control is-expanded">
-                    <input type="text"
-                        class="input is-large"
-                        name="query"
-                        {% if search_query %} value="{{ search_query }}"{% endif %}>
+            <form action="{% url 'search' %}" method="get" id="search-form">
+                <div class="field has-addons is-horizonal">
+                    <div class="control is-expanded">
+                        <input type="text"
+                            class="input is-large"
+                            name="query"
+                            {% if search_query %} value="{{ search_query }}"{% endif %}>
+                    </div>
+                    <div class="control">
+                        <a type="submit"
+                            value="Search"
+                            class="button is-link is-large"
+                            onclick="document.getElementById('search-form').submit();">
+                            <span class="icon is-small is-left">
+                                <i class="mdi mdi-magnify"></i>
+                            </span>
+                        </a>
+                    </div>
                 </div>
-                <div class="control">
-                    <a type="submit"
-                        value="Search"
-                        class="button is-link is-large"
-                        onclick="document.getElementById('search-form').submit();">
-                        <span class="icon is-small is-left">
-                            <i class="mdi mdi-magnify"></i>
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </form>
-
-        {% if search_results %}
-            {% for article in search_results %}
-                {% include "blog/preview_article.html" %}
-            {% endfor %}
-
-            {% include "pagination.html" with articles=search_results %}
-
-        {% elif search_query %}
-            <p style="text-align: center">No articles found</p>
-        {% endif %}
+            </form>
+        </div>
     </div>
-</div>
+</section>
+
+
+<section class="section">
+
+    {% if search_results %}
+        {% include "blog/preview_articles.html" with articles=search_results %}
+    {% elif search_query %}
+        <p style="text-align: center">No articles found</p>
+    {% endif %}
+
+</section>
 
 {% endblock %}

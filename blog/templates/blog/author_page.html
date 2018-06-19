@@ -4,35 +4,39 @@
 
 {% block page-content %}
 
-<div class="row">
-    <div class="col-md-8">
-        <div class="author-page-block">
+<section class="section">
+
+    <div class="container">
+        <div class="columns">
             {% if self.portrait %}
-            <div class="img-wrapper">
-                {% image self.portrait fill-700x800 class="author-photo" %}
-            </div>
+                <div class="column is-4">
+                    <div class="img-wrapper">
+                        {% image self.portrait fill-700x800 class="author-photo" %}
+                    </div>
+                </div>
             {% endif %}
-            <h4 class="subject-header">Contributor</h4>
-            <h3 class="author-header">{{ self.title }}</h3>
-            {% if self.twitter_handle %}
-            <div id="twitter-follow">
-                <a href="https://twitter.com/{{ self.twitter_handle }}"
-                   class="twitter-follow-button" data-show-screen-name="false"
-                   data-show-count="false">Follow</a>
-                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-            {% endif %}
-            <div class="author-bio">
-                {{ self.long_bio|make_markdown }}
+            <div class="column">
+                <h1 class="title is-1">{{ self.title }}</h1>
+                {% if self.twitter_handle %}
+                    <div id="twitter-follow" class="title is-6">
+                        <a href="https://twitter.com/{{ self.twitter_handle }}"
+                        class="twitter-follow-button" data-show-screen-name="false"
+                        data-show-count="false">Follow</a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                {% endif %}
+                <div class="content">
+                    {{ self.long_bio|make_markdown }}
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        {% for article in self.author_articles.all %}
-            {% include "blog/article_row.html" %}
-        {% endfor %}
-    </div>
-</div>
+</section>
+
+<section class="section">
+    {% include "blog/preview_articles.html" with articles=self.author_articles.all %}
+</section>
+
+</section>
+
 {% endblock %}

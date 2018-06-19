@@ -9,16 +9,16 @@ $article-width: 1000px;
 
 $navbar-height: 10rem;
 
-$green: #058E3F;
+$green: #069E2D;
 $green-invert: findColorInvert($green);
 
 $size-8: 0.5rem;
 
 $family-sans-serif: 'Montserrat', sans-serif;
-$family-title: 'Frank Ruhl Libre', serif;
+$family-title: 'Montserrat', 'Frank Ruhl Libre', serif;
 $family-subtitle: 'Share Tech', sans-serif;
 
-$title-weight: $weight-normal;
+$title-weight: 500;
 $subtitle-weight: $weight-normal;
 
 $content-heading-weight: $weight-normal;
@@ -28,6 +28,8 @@ $primary: $black-bis;
 
 $fade-dur: 0.5s;
 
+
+
 // Derived variables
 
 @import "node_modules/bulma/sass/utilities/derived-variables";
@@ -35,6 +37,9 @@ $fade-dur: 0.5s;
 $code-background: $white-ter;
 $code: $text;
 $code-padding: 3px 6px 3px;
+
+$navbar-item-hover-background-color: $link;
+
 
 // Custom CSS
 
@@ -64,7 +69,7 @@ a {
 .hero {
     .title {
         display: inline-block;
-        font-weight: 300;
+        //font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 3px;
         opacity: .9;
@@ -75,20 +80,35 @@ a {
         &:hover {opacity: 1;}
     }
     .title.is-2.is-boxed {
-        border-width: 2px;
+        border-width: 4px;
         padding: 0.75rem 1.5rem;
     }
     .title.is-0 {
         font-size: 100px;
         &.is-boxed{
             padding: $gap/2 $gap;
-            border-width: 3px;
+            border-width: 8px;
+            @include mobile {
+                border-width: 4px;
+                font-size: 10vw;
+                padding: 2vw 4vw;
+            }
         }
-        @include mobile {
-            border-width: 2px;
-            font-size: 15vw;
-            padding: 2vw 4vw;
+    }
+
+    &.is-light .is-article-preview {
+        a:not(.button):not(.dropdown-item):not(.tag) {
+            color: $link;
+            &:hover {color: inherit;}
         }
+        .title a:not(.button):not(.dropdown-item):not(.tag) {
+            color: inherit;
+            &:hover {color: $link;}
+        }
+    }
+
+    &.is-primary .is-article-preview .subtitle {
+        a {color: $link;}
     }
 }
 
@@ -115,14 +135,15 @@ a {
             }
         }
     }
-    &.is-article-preview {
-        .title {
-            a {color: inherit;}
-            a:hover {color: $link;}
-            //margin: $size-8 0;
-        }
-    }
 
+}
+
+.is-article-preview {
+    .title {
+        a {color: inherit;}
+        a:hover {color: $link;}
+        //margin: $size-8 0;
+    }
 }
 
 .read-more {
@@ -146,7 +167,7 @@ a {
         font-size: .85rem;
         p {
             margin-bottom: 0;
-            font-style: italic;
+            //font-style: italic;
         }
         .img-source {
             margin-top: 0.25rem;

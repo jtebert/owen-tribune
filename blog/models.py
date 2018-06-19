@@ -398,7 +398,7 @@ class AuthorPage(Page):
         Get all articles by this author
         :return: QuerySet of ArticlePages
         """
-        return ArticlePage.objects.live().filter(author=self).order_by('title')
+        return ArticlePage.objects.live().filter(author=self).order_by('-date')
 
     def __unicode__(self):
         return self.title
