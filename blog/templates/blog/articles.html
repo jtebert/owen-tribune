@@ -1,0 +1,19 @@
+{% extends "hero_page.html" %}
+
+{% load wagtailcore_tags create_page_range make_markdown %}
+
+{% block title %}
+    Posts
+{% endblock title %}
+
+{% block page_title %}
+    Posts
+{% endblock page_title %}
+
+{% block page-content %}
+
+<section class="section">
+    {% include "blog/preview_articles.html" %}
+</section>
+
+{% endblock %}

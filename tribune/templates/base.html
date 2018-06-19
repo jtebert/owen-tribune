@@ -48,7 +48,14 @@
             {% flat_menu 'footer_menu' %}
             <div class="content has-text-centered">
             <p>
-                <strong>{{ request.site.site_name }}</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>.
+                <strong>{{ request.site.site_name }}</strong> by
+                {% with settings.home.GeneralSettings as gs %}
+                    {% if gs.site_author and gs.site_author_link %}
+                        <a href="{{ gs.site_author_link }}">{{ gs.site_author }}</a>
+                    {% elif gs.site_author %}
+                        {{ gs.site_author }}
+                    {% endif %}
+                {% endwith %}
             </p>
             </div>
         </div>

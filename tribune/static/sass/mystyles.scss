@@ -79,10 +79,10 @@ a {
 .hero {
     .title {
         //font-weight: 500;
-        text-transform: uppercase;
         letter-spacing: 3px;
         opacity: .9;
         &.is-boxed {
+            text-transform: uppercase;
             border-style: solid;
             border-color: $primary-invert;
         }
@@ -257,6 +257,12 @@ a {
     .card.is-author p {
         margin: 0;
     }
+}
+
+.title.is-error-num {
+    display: block;
+    font-size: 30vw;
+    letter-spacing: 0;
 }
 
 .footer .nav.is-flat {

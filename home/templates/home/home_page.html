@@ -25,7 +25,7 @@
 </section>
 
 {% if self.featured_article %}
-  <section class="hero is-light is-medium">
+  <section class="hero is-light">
     <div class="hero-body">
       <div class="container">
         <div class="columns is-article-preview">
@@ -61,51 +61,15 @@
   <div class="columns">
     <div class="column is-8-desktop is-offset-2-desktop">
         <h1 class="title is-1">Recent Posts</h1><br>
-      {% for a in self.preview_articles.all %}
-        {% include "blog/preview_article.html" with article=a.article %}
-      {% endfor %}
+        {% for article in self.latest_articles.all %}
+          {% include "blog/preview_article.html" %}
+        {% endfor %}
+        <div class="has-text-centered">
+          <a class="button is-large" href="{% url 'articles' %}">See More Posts</a>
+        </div>
     </div>
   </div>
 </section>
-
-{% comment %}
-<div class="container">
-    <h1 id="paper-title"><a href="/">
-      {{ settings.home.GeneralSettings.site_name }}
-    </a></h1>
-
-    {% subject_menu current_page=self %}
-</div><!--/.container-->
-
-<div class="container">
-
-{% if self.featured_article %}
-    {% with self.featured_article as fa %}
-  <div class="row featured-article">
-    <div class="col-md-7">
-        {% image fa.main_image fill-1000x600 as tmp_photo %}
-        <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}}/>
-    </div>
-    <div class="col-md-5">
-      <h4 class="subject-header"><a href="{{ fa.subject.url }}">{{ fa.subject }}</a></h4>
-      <h2 class="article-header"><a href="{{ fa.url }}">{{ fa.title }}</a></h2>
-      <h3 class="author-header">By <a href="{{ fa.author.url }}">{{ fa.author }}</a></h3>
-      <p class="intro">{{ fa.intro }}</p>
-    </div>
-  </div>
-  <hr/>
-    {% endwith %}
-{% endif %}
-
-  <div class="row border-between">
-
-      {% for a in self.preview_articles.all %}
-        {% with a.article as article %}
-            {% include "blog/preview_article.html" %}
-        {% endwith %}
-    {% endfor %}
-  </div>
-{% endcomment %}
 
 </div> <!-- /container -->
 {% endblock %}

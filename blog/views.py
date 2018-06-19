@@ -39,3 +39,28 @@ def tag_filter(request):
         'tags': tags,
         'filter_results': articles,
     })
+
+
+def articles(request):
+    # Show all articles, sorted newest to oldest
+    articles = ArticlePage.objects.live().order_by('-date')
+
+    # Pagination
+    page = request.GET.get('page')
+    page_size = 10
+    from home.models import GeneralSettings
+    if GeneralSettings.for_site(request.site).pagination_count:
+        page_size = GeneralSettings.for_site(request.site).pagination_count
+
+    if page_size is not None:
+        paginator = Paginator(articles, page_size)
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+
+    return render(request, 'blog/articles.html', {
+        'articles': articles,
+    })

@@ -38,36 +38,22 @@ DEFAULT_RICHTEXT_FEATURES = [
 class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
 
-    body = models.TextField(blank=True, help_text=md_format_help)
     featured_article = models.ForeignKey(
         ArticlePage,
         null=True, blank=True,
         on_delete=models.SET_NULL)
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full"),
         PageChooserPanel('featured_article'),
-        InlinePanel('preview_articles', label='Previewed Articles', max_num=3),
     ]
 
     class Meta:
         verbose_name = "Homepage"
 
     def latest_articles(self):
-        articles = ArticlePage.objects.live()
+        articles = ArticlePage.objects.live().exclude(pk=self.featured_article.pk)
         articles = articles.order_by('-date')
         return articles[0:5]
-
-
-class PreviewArticle(Orderable):
-    page = ParentalKey('HomePage', related_name='preview_articles')
-    article = models.ForeignKey(ArticlePage,
-                                on_delete=models.SET_NULL,
-                                null=True)
-
-    panels = [
-        PageChooserPanel('article'),
-    ]
 
 
 class InfoPage(Page):
@@ -163,15 +149,11 @@ def register_strikethrough_feature(features):
 
 @register_setting
 class GeneralSettings(BaseSetting):
-    site_tagline = models.CharField(
-        max_length=255,
-        blank=True,
-        help_text='Tagline to show after the site title'
-    )
-    site_description = models.TextField(
-        blank=True,
-        help_text='Description of website (to appear on searches)',
-    )
+    site_author = models.TextField(
+        max_length=127,
+        blank=True, null=True)
+    site_author_link = models.URLField(
+        blank=True, null=True)
     pagination_count = models.PositiveIntegerField(
         default=10,
         help_text="Number of posts to display per page on index pages")
@@ -185,8 +167,8 @@ class GeneralSettings(BaseSetting):
         help_text='Google Analytics Tracking ID')
 
     panels = [
-        FieldPanel('site_tagline'),
-        FieldPanel('site_description'),
+        FieldPanel('site_author'),
+        FieldPanel('site_author_link'),
         FieldPanel('pagination_count'),
         FieldPanel('disqus'),
         FieldPanel('google_analytics_id'),
