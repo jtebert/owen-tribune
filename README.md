@@ -7,14 +7,15 @@ This is a news/magazine/blog backend and template. The design is heavily inspire
 
 - Install system packages: `sudo apt install libpq-dev postgresql python3-dev python3-venv`
 - Install node packages: `npm install`
-- Create a virtual environment: `python3 -m venv venv`
+- Create a virtual environment: `virtualenv -p python3 venv`
 - Activate the virtual environment: `source venv/bin/activate` (deactivate with `deactivate`)
-- Install python packages: `pip3 install wheel; pip3 install -r requirements.txt`
+- Install python packages: `pip3 install -r requirements.txt`
 - Start postgresql (if not already running): `sudo service postgresql start`
 - Create database (`tribune_db`):
   - Run as postgres user: `sudo -i -u postgres`
   - Create database: `createdb tribune_db`
   - Get out: `exit`
+  - If your user doesn't already have a postgres user/role: `sudo -u postgres createuser USERNAME`
 - Create configuration file in the root folder of the project called `settings.ini`
 	```
 	[settings]
