@@ -4,13 +4,13 @@
 {% if current_page|to_class_name != "HomePage" %}
     <nav class="navbar is-transparent">
         <div class="container">
-        <div class="navbar-brand is-transparent">
+        <div class="navbar-brand is-transparent has-text-centered">
             <a class="navbar-item" href="/"><h2 class="title is-2 is-boxed">
                 {{ request.site.site_name }}
             </h2></a>
         </div>
             <div class="navbar-end">
-                <nav class="tabs is-large">
+                <nav class="tabs is-medium">
                     {% for subject in menuitems %}
                         <a href="{{ subject.url }}">{{ subject.title }}</a>
                     {% endfor %}
@@ -20,7 +20,7 @@
         </div>
     </nav>
 {% else %}
-    <nav class="tabs is-centered is-large">
+    <nav class="tabs is-centered is-medium">
         <div class="container">
             <ul>
                 {% for subject in menuitems %}

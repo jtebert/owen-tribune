@@ -3,7 +3,7 @@
 @import "node_modules/bulma/sass/utilities/initial-variables";
 @import "node_modules/bulma/sass/utilities/functions";
 
-$body-size: 17px;
+$body-size: 16px;
 
 $article-width: 1000px;
 
@@ -73,18 +73,21 @@ a {
 .tabs, .subtitle, .article-subject, .article-info {
     font-family: $family-subtitle;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .hero {
+    .navbar .navbar-brand .navbar-item {
+        flex-shrink: 1;
+    }
     .title {
         //font-weight: 500;
-        letter-spacing: 3px;
         opacity: .9;
         &.is-boxed {
             text-transform: uppercase;
             border-style: solid;
             border-color: $primary-invert;
+            letter-spacing: 2px;
         }
         &:hover {opacity: 1;}
     }
@@ -95,12 +98,15 @@ a {
     .title.is-0 {
         font-size: 100px;
         display: inline-block;
+        @include mobile {
+            font-size: 13vw;
+        }
         &.is-boxed{
             padding: $gap/2 $gap;
             border-width: 8px;
             @include mobile {
-                border-width: 4px;
                 font-size: 10vw;
+                border-width: 4px;
                 padding: 2vw 4vw;
             }
         }
@@ -142,7 +148,7 @@ a {
             .card-image {
                 display: block;
                 width: 100%;
-                padding-bottom: 75%;
+                padding-bottom: 65%;
             }
         }
     }
@@ -187,14 +193,18 @@ a {
         }
     }
     &.left {
-        float: left;
-        margin-right: 1.5rem;
-        width: calc(50% - 1.5rem);
+        @include tablet {
+            float: left;
+            margin-right: 1.5rem;
+            width: calc(50% - 1.5rem);
+        }
     }
     &.right {
-        float: right;
-        margin-right: 1.5rem;
-        width: calc(50% - 1.5rem);
+        @include tablet {
+            float: right;
+            margin-right: 1.5rem;
+            width: calc(50% - 1.5rem);
+        }
     }
     &.centered {
         width: 750px;
@@ -219,8 +229,8 @@ a {
         font-family: $family-title;
         //font-style: italic;
         display: block;
-        color: $grey;
-        font-size: 1.3rem;
+        //color: $grey;
+        font-size: 1.2rem;
         margin: $gap/2 0;
     }
 
@@ -257,6 +267,10 @@ a {
     .card.is-author p {
         margin: 0;
     }
+}
+
+.has-tags .button {
+    margin: 0.25rem;
 }
 
 .title.is-error-num {

@@ -36,7 +36,7 @@
             </div>
             <div class="column is-5">
               <h4 class="subtitle is-4"><a href="{{ fa.subject.url }}">{{ fa.subject }}</a></h4>
-              <h2 class="title is-1"><a href="{{ fa.url }}">{{ fa.title }}</a></h2>
+              <h2 class="title is-size-1-desktop is-size-2-touch"><a href="{{ fa.url }}">{{ fa.title }}</a></h2>
               <h3 class="subtitle is-4">
                 By <a href="{{ fa.author.url }}">{{ fa.author }}</a>
                 &emsp;|&emsp;
@@ -65,7 +65,7 @@
           {% include "blog/preview_article.html" %}
         {% endfor %}
         <div class="has-text-centered">
-          <a class="button is-large" href="{% url 'articles' %}">See More Posts</a>
+          <a class="button is-medium" href="{% url 'articles' %}">See More Posts</a>
         </div>
     </div>
   </div>

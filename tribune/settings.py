@@ -137,7 +137,6 @@ STATICFILES_FINDERS = [
 
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'tribune', 'static'),
-    ('node_modules', os.path.join(PROJECT_DIR, 'node_modules'))
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -201,7 +200,8 @@ else:
 DEBUG = config('DEBUG', cast=bool)
 if DEBUG:
     # DEVELOPMENT
-    pass
+    STATICFILES_DIRS += \
+        ('node_modules', os.path.join(PROJECT_DIR, 'node_modules'))
 else:
     # PRODUCTION
     # Allow all host headers

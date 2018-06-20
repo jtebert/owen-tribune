@@ -1,7 +1,7 @@
 {% load wagtailimages_tags make_markdown %}
 
 <figure class="image is-captioned {{self.image_format }}">
-    {% image self.image original %}
+    {% image self.image width-1920 %}
 
     {% if self.caption or self.image.caption or self.image.source_url or self.image.source_name %}
         <figcaption>

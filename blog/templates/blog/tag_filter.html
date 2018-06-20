@@ -20,7 +20,7 @@
 
 <div class="hero is-light">
     <div class="hero-body">
-        <div class="container has-text-centered">
+        <div class="container has-text-centered has-tags">
             {% for tag in tags %}
                 <a class="button" href="{% url 'tag_filter' %}?tag={{ tag }}">
                     {{ tag }}

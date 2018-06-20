@@ -13,7 +13,7 @@
     <div class="hero-body">
         <div class="article is-article-preview">
             <h5 class="subtitle is-4"><a href="{{ self.subject.url }}">{{ self.subject }}</a></h5>
-            <h1 class="title is-1">{{ self.title }}</h1>
+            <h1 class="title is-size-1-desktop is-size-3-touch">{{ self.title }}</h1>
             <h5 class="subtitle is-5 article-info">
                 By <a href="{{ self.author.url }}">{{ self.author }}</a>&emsp;|&emsp;{{ self.date }}
             </h5>
@@ -23,7 +23,7 @@
         {% if self.main_image %}
             <div class="container">
                 <figure class="image is-captioned">
-                    {% image self.main_image fill-1600x900 class="article-photo" %}
+                    {% image self.main_image fill-1920x1080 class="article-photo" %}
                     <figcaption>
                         {% if self.main_image.caption %}
                             {{ self.main_image.caption|make_markdown }}
@@ -44,17 +44,15 @@
         {% endif %}
 
 
-        <div class="article">
-            <div class="article-intro content">{{ self.intro | make_markdown }}</div>
-            <nav class="level is-mobile">
-                <div class="level-left">
-                    {% for tag in page.tags.all %}
-                        <a class="level-item button" href="{% url 'tag_filter' %}?tag={{ tag }}">
-                            {{ tag }}
-                        </a>
-                    {% endfor %}
-                </div>
-            </nav>
+        <div class="article has-tags">
+            <div class="article-intro content">
+                {{ self.intro | make_markdown }}
+            </div>
+            {% for tag in page.tags.all %}
+                <a class="button" href="{% url 'tag_filter' %}?tag={{ tag }}">
+                    {{ tag }}
+                </a>
+            {% endfor %}
         </div>
 
     </div>
@@ -100,7 +98,7 @@
             <article class="media">
                 <figure class="media-left">
                     <p class="image is-96x96">
-                        {% image self.author.portrait fill-192x192 class="author-photo" %}
+                        {% image self.author.portrait fill-192x192-c75 class="author-photo" %}
                     </p>
                 </figure>
                 <div class="media-content">
