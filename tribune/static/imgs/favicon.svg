@@ -9,16 +9,16 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="13.173837mm"
-   height="13.173837mm"
-   viewBox="0 0 46.678949 46.678949"
+   width="96"
+   height="96"
+   viewBox="0 0 95.999996 95.999996"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="favicon.svg"
    inkscape:export-filename="/media/devices/Media/git-repos/django-blog/owen-tribune/tribune/static/imgs/favicon.png"
-   inkscape:export-xdpi="185.09"
-   inkscape:export-ydpi="185.09">
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.9195959"
-     inkscape:cx="-8.4040323"
-     inkscape:cy="8.028351"
+     inkscape:zoom="5.6"
+     inkscape:cx="66.9222"
+     inkscape:cy="70.346317"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -42,7 +42,8 @@
      inkscape:window-height="1512"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     units="px" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -59,25 +60,25 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-401.25003,-641.18671)">
+     transform="translate(-401.25001,-591.86563)">
     <rect
        id="rect3340"
-       width="42.678947"
-       height="42.678947"
-       x="403.25003"
-       y="643.18671"
-       style="fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none" />
+       width="87.77359"
+       height="87.77359"
+       x="405.36322"
+       y="595.97882"
+       style="fill:#000000;stroke:#ffffff;stroke-width:8.2264061;stroke-miterlimit:4;stroke-dasharray:none" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:125%;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="408.84952"
-       y="678.52618"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:82.26406097px;line-height:125%;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="416.87912"
+       y="668.65808"
        id="text3336"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3338"
-         x="408.84952"
-         y="678.52618"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium'">R</tspan></text>
+         x="416.87912"
+         y="668.65808"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';fill:#ffffff;">R</tspan></text>
   </g>
 </svg>

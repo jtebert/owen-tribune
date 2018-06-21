@@ -96,7 +96,7 @@ a {
         padding: 0.75rem 1.5rem;
     }
     .title.is-0 {
-        font-size: 100px;
+        font-size: 90px;
         display: inline-block;
         @include mobile {
             font-size: 13vw;
@@ -159,7 +159,6 @@ a {
     .title {
         a {color: inherit;}
         a:hover {color: $link;}
-        //margin: $size-8 0;
     }
 }
 
@@ -184,7 +183,6 @@ a {
         font-size: .85rem;
         p {
             margin-bottom: 0;
-            //font-style: italic;
         }
         .img-source {
             margin-top: 0.25rem;
@@ -227,9 +225,7 @@ a {
 
     .article-intro {
         font-family: $family-title;
-        //font-style: italic;
         display: block;
-        //color: $grey;
         font-size: 1.2rem;
         margin: $gap/2 0;
     }
@@ -260,8 +256,6 @@ a {
             border: none;
         }
         td {padding: 0;}
-        //.linenos pre {padding-right: 0;}
-        //.code pre {padding-left: 0;}
     }
 
     .card.is-author p {
@@ -288,10 +282,4 @@ a {
 }
 
 
-
-
 @import "node_modules/bulma/bulma";
-
-body {
-    //line-height: 1.6;
-}

@@ -15,6 +15,8 @@ from __future__ import absolute_import, unicode_literals
 from decouple import config
 import os
 
+DEBUG = config('DEBUG', cast=bool)
+
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -138,6 +140,11 @@ STATICFILES_FINDERS = [
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'tribune', 'static'),
 ]
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(PROJECT_DIR, 'tribune', 'static'),
+        ('node_modules', os.path.join(PROJECT_DIR, 'node_modules'))
+    ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -197,11 +204,11 @@ else:
     EMAIL_PORT = config('EMAIL_PORT', cast=int)
     EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=True)
 
-DEBUG = config('DEBUG', cast=bool)
 if DEBUG:
     # DEVELOPMENT
-    STATICFILES_DIRS += \
-        ('node_modules', os.path.join(PROJECT_DIR, 'node_modules'))
+    pass
+    # STATICFILES_DIRS += \
+    #     ('node_modules', os.path.join(PROJECT_DIR, 'node_modules'))
 else:
     # PRODUCTION
     # Allow all host headers
