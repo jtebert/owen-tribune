@@ -9,16 +9,16 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64"
-   height="64"
-   viewBox="0 0 64.000001 64.000001"
+   width="13.173837mm"
+   height="13.173837mm"
+   viewBox="0 0 46.678949 46.678949"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="favicon.svg"
-   inkscape:export-filename="/home/jtebert/google-drive/Projects/Programming/python/owen-tribune/favicon.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-filename="/media/devices/Media/git-repos/django-blog/owen-tribune/tribune/static/imgs/favicon.png"
+   inkscape:export-xdpi="185.09"
+   inkscape:export-ydpi="185.09">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -28,15 +28,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="53.90143"
-     inkscape:cy="82.196405"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="-8.4040323"
+     inkscape:cy="8.028351"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     units="px"
-     inkscape:window-width="1920"
-     inkscape:window-height="1050"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="2400"
+     inkscape:window-height="1512"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
@@ -56,18 +59,25 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-988.36216)">
+     transform="translate(-401.25003,-641.18671)">
+    <rect
+       id="rect3340"
+       width="42.678947"
+       height="42.678947"
+       x="403.25003"
+       y="643.18671"
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:84.81085968px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="4.3092537"
-       y="1047.968"
-       id="text4136"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:125%;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="408.84952"
+       y="678.52618"
+       id="text3336"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan4138"
-         x="4.3092537"
-         y="1047.968"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Olde English';-inkscape-font-specification:'Olde English'">O</tspan></text>
+         id="tspan3338"
+         x="408.84952"
+         y="678.52618"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium'">R</tspan></text>
   </g>
 </svg>
