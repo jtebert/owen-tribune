@@ -4,11 +4,13 @@ from taggit.models import Tag
 
 from blog.models import ArticlePage
 
+from home.models import GeneralSettings
+
+
 # Create your views here.
 
 
 def tag_filter(request):
-    # Get all tags that exist
     tags = ArticlePage.tags.order_by('name')
 
     # Tag
@@ -21,7 +23,6 @@ def tag_filter(request):
     # Pagination
     page = request.GET.get('page')
     page_size = 10
-    from home.models import GeneralSettings
     if GeneralSettings.for_site(request.site).pagination_count:
         page_size = GeneralSettings.for_site(request.site).pagination_count
 
@@ -48,7 +49,6 @@ def articles(request):
     # Pagination
     page = request.GET.get('page')
     page_size = 10
-    from home.models import GeneralSettings
     if GeneralSettings.for_site(request.site).pagination_count:
         page_size = GeneralSettings.for_site(request.site).pagination_count
 

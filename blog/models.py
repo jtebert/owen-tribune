@@ -139,15 +139,20 @@ class ArticlePage(Page):
         ('media', OptionsMediaBlock()),
         ('code', CodeBlock()),
     ])
+    notes = models.TextField(
+        null=True, blank=True,
+        help_text="This text will not appear on the page.")
     tags = ClusterTaggableManager(through=ArticlePageTag, blank=True)
 
     content_panels = Page.content_panels + [
         PageChooserPanel('author', ),
         FieldPanel('date'),
         ImageChooserPanel('main_image'),
+        InlinePanel('article_audiences', label='Audiences'),
+        FieldPanel('tags'),
         FieldPanel('intro'),
         StreamFieldPanel('body'),
-        FieldPanel('tags'),
+        FieldPanel('notes'),
     ]
 
     search_fields = Page.search_fields + [
@@ -165,96 +170,92 @@ class ArticlePage(Page):
         # Find closest ancestor which is article index page
         return self.get_ancestors().type(ArticleIndexPage).last()
 
-    """def subject(self):
-        # TODO: Replace/remove
-        subject = ArticleIndexPage.objects.ancestor_of(self).last().subject
-        if subject is not None:
-            return subject
-        else:
-            return ""
-    """
 
-    """
-    def all_subjects(self):
-        # TODO: Replace/remove
-        subjects = []
-        for s in SubjectPage.objects.all():
-            subjects.append(ArticleIndexPage.objects.filter(subject=s)[0])
-        return subjects
-    """
+class AudienceIndexPage(Page):
+    #parent_page_types = [home.models.HomePage, ]
+    subpage_types = ['AudiencePage']
+
+    class Meta:
+        verbose_name = 'Audiences'
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(AudienceIndexPage, self).get_context(
+            request, *args, **kwargs)
+        audiences = self.get_children().live().order_by('title')
+        context['audiences'] = audiences
+        return context
+
+    def articles(self, audience_filter=None):
+        """
+        Return all articles if no audience specified, otherwise only those from that Audience
+        :param audience_filter: str
+        :return: QuerySet of Articles (I think)
+        """
+        articles = ArticlePage.objects.live().descendant_of(self)
+        if audience_filter is not None:
+            articles = articles.filter(audience__name=audience_filter)
+        articles = articles.order_by('-date')
+        return articles
 
 
-class SourceLink(models.Model):
-    title = models.TextField(max_length=1023, help_text=md_format_help +
-                             "Use a standard citation format.", blank=True, null=True)
-    url = models.URLField('Link to Source', blank=True, null=True)
+class AudiencePage(Page):
+    parent_page_types = ['AudienceIndexPage', ]
+    subpage_types = []
 
-    panels = [
-        FieldPanel('title'),
-        FieldPanel('url'),
+    class Meta:
+        verbose_name = 'Audience'
+
+    intro = models.TextField(
+        max_length=480,
+        blank=True, null=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro'),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(AudiencePage, self).get_context(
+            request, *args, **kwargs)
+        articles = ArticlePage.objects.live().filter(
+            article_audiences__audience=self).order_by('-date')
+
+        # Pagination
+        page = request.GET.get('page')
+        page_size = 10
+        from home.models import GeneralSettings
+        if GeneralSettings.for_site(request.site).pagination_count:
+            page_size = GeneralSettings.for_site(request.site).pagination_count
+
+        if page_size is not None:
+            paginator = Paginator(articles, page_size)
+            try:
+                articles = paginator.page(page)
+            except PageNotAnInteger:
+                articles = paginator.page(1)
+            except EmptyPage:
+                articles = paginator.page(paginator.num_pages)
+
+        context['articles'] = articles
+        return context
 
     def __unicode__(self):
         return self.title
 
-    class Meta:
-        abstract = True
 
-
-class LinkFields(models.Model):
-    link_external = models.URLField("External link", blank=True)
-    link_page = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        related_name='+',
-        on_delete=models.SET_NULL,
-    )
-
-    @property
-    def link(self):
-        if self.link_page:
-            return self.link_page.url
-        else:
-            return self.link_external
+class AudienceLink(Orderable):
+    page = ParentalKey('ArticlePage', related_name='article_audiences')
+    audience = models.ForeignKey(AudiencePage,
+                                 on_delete=models.SET_NULL,
+                                 null=True,
+                                 )
 
     panels = [
-        FieldPanel('link_external'),
-        PageChooserPanel('link_page'),
+        PageChooserPanel('audience')
     ]
-
-    class Meta:
-        abstract = True
-
-
-# Related links
-class RelatedLink(LinkFields):
-    title = models.CharField(max_length=255, help_text="Link title")
-
-    panels = [
-        FieldPanel('title'),
-        MultiFieldPanel(LinkFields.panels, "Link"),
-    ]
-
-    class Meta:
-        abstract = True
-
-
-class ArticleIndexRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('ArticleIndexPage', related_name='related_links')
 
 
 class ArticleIndexPage(Page):
     subpage_types = ['ArticlePage']
-
-    intro = models.TextField(
-        blank=True,
-        help_text=md_format_help)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full"),
-        # InlinePanel('related_links', label="Related links"),
-    ]
 
     class Meta:
         verbose_name = 'Subject Section'
@@ -263,11 +264,6 @@ class ArticleIndexPage(Page):
         context = super(ArticleIndexPage, self).get_context(
             request, *args, **kwargs)
         articles = self.articles()
-
-        # Tags
-        tag = request.GET.get('tag')
-        if tag:
-            articles = articles.filter(tags__name=tag)
 
         # Pagination
         page = request.GET.get('page')
@@ -325,38 +321,6 @@ class SubjectPage(Page):
         verbose_name = "Subject"
 
 
-'''
-class SubjectCategoryPage(Page):
-    parent_page_types = ['SubjectIndexPage']
-    subpage_types = ['SubjectPage']
-
-    def __unicode__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Subject Category'
-
-
-class SubjectIndexPage(Page):
-    subpage_types = ['SubjectCategoryPage']
-
-    intro = models.TextField(
-        blank=True,
-        help_text=md_format_help)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('intro')
-    ]
-
-    def list_subjects(self):
-        """
-        List all authors
-        :return:
-        """
-        return SubjectPage.objects.all()
-'''
-
-
 class AuthorPage(Page):
     parent_page_types = ['AuthorIndexPage']
     subpage_types = []
@@ -405,6 +369,7 @@ class AuthorPage(Page):
 
 
 class AuthorIndexPage(Page):
+    #parent_page_types = [HomePage, ]
     subpage_types = ['AuthorPage']
 
     intro = models.TextField(

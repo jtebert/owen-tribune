@@ -3,24 +3,25 @@
 
 This is a news/magazine/blog backend and template. The design is heavily inspired by *The New Yorker* and *The New York Times*. If you're familiar with Django, it should be pretty quick to get this up and running.
 
-## Setup (Ubuntu Linux):
+## Setup (Ubuntu Linux)
 
-- Install system packages: `sudo apt install libpq-dev postgresql python3-dev python3-venv`
+- Install system packages: `sudo apt install libpq-dev postgresql python3-dev python3-venv npm`
 - Install node packages: `npm install`
 - Create a virtual environment: `virtualenv -p python3 venv`
 - Activate the virtual environment: `source venv/bin/activate` (deactivate with `deactivate`)
 - Install python packages: `pip3 install -r requirements.txt`
 - Start postgresql (if not already running): `sudo service postgresql start`
 - Create database (`tribune_db`):
+  - If your user doesn't already have a postgres user/role: `sudo -u postgres createuser USERNAME`
   - Run as postgres user: `sudo -i -u postgres`
   - Create database: `createdb tribune_db`
   - Get out: `exit`
-  - If your user doesn't already have a postgres user/role: `sudo -u postgres createuser USERNAME`
 - Create configuration file in the root folder of the project called `settings.ini`
 	```
 	[settings]
 	DEBUG=True
-	SECRET_KEY=ARANDOMKEY
+	SECRET_KEY=A_RANDOM_KEY
+  BASE_URL=127.0.0.1
 	```
 	There are additional settings that can be configured for production. (Search for `config(` in settings.py)
 - Run migrations: `python3 manage.py migrate`
@@ -31,11 +32,12 @@ You'll also have to set up a postgres database. I do this by reading the error m
 
 In development, static and media files are served from local folders. In production, they will be served from Amazon S3. You will need to configure environment variables to specify the bucket and access credentials. (See `tribune/settings/production.py` for details.)
 
-### Possibly necessary steps (if not previously set up)
+## Optional: Gulp setup (BrowserSync)
 
-- Create a postgres user: `sudo -u createuser YOUR_USERNAME`
+- Install gulp (if not already installed): `npm install --global gulp-cli`
+- If you get an error, try: `sudo ln -s /usr/bin/nodejs /usr/bin/node`
 
-## Features:
+## Features
 
 - Articles:
   - Create custom subject categories

@@ -21,8 +21,7 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 import wagtail.admin.rich_text.editors.draftail.features as draftail_features
 from wagtail.admin.rich_text.converters.html_to_contentstate import InlineStyleElementHandler
 
-from blog.models import ArticlePage, CaptionedImageBlock, CodeBlock, QuoteBlock, TableBlock, OptionsMediaBlock
-
+import blog.models
 
 md_format_help = 'This text will be formatted with markdown.'
 DEFAULT_RICHTEXT_FEATURES = [
@@ -39,7 +38,7 @@ class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
 
     featured_article = models.ForeignKey(
-        ArticlePage,
+        blog.models.ArticlePage,
         null=True, blank=True,
         on_delete=models.SET_NULL)
 
@@ -51,9 +50,9 @@ class HomePage(Page):
         verbose_name = "Homepage"
 
     def latest_articles(self):
-        articles = ArticlePage.objects.live()
+        articles = blog.models.ArticlePage.objects.live()
         if self.featured_article:
-             articles.exclude(pk=self.featured_article.pk)
+            articles.exclude(pk=self.featured_article.pk)
         articles = articles.order_by('-date')
         return articles[0:5]
 
@@ -63,16 +62,20 @@ class InfoPage(Page):
 
     body = StreamField([
         ('text', blocks.RichTextBlock(features=DEFAULT_RICHTEXT_FEATURES)),
-        ('captioned_image', CaptionedImageBlock()),
+        ('captioned_image', blog.models.CaptionedImageBlock()),
         ('embed', EmbedBlock(icon='media')),
-        ('pull_quote', QuoteBlock()),
-        ('table', TableBlock(template='blog/table_block.html')),
-        ('media', OptionsMediaBlock()),
-        ('code', CodeBlock()),
+        ('pull_quote', blog.models.QuoteBlock()),
+        ('table', blog.models.TableBlock(template='blog/table_block.html')),
+        ('media', blog.models.OptionsMediaBlock()),
+        ('code', blog.models.CodeBlock()),
     ])
+    notes = models.TextField(
+        null=True, blank=True,
+        help_text="This text will not appear on the page.")
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body')
+        StreamFieldPanel('body'),
+        FieldPanel('notes'),
     ]
 
     class Meta:

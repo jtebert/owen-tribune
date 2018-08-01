@@ -247,6 +247,11 @@ a {
         p, .block-table, .block-code {margin-bottom: 1rem;}
         table {width: auto;}
     }
+    .content::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
     .block-table, .block-code {
         overflow-x: auto;
     }

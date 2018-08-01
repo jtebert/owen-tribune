@@ -12,10 +12,21 @@
 
     <div class="hero-body">
         <div class="article is-article-preview">
-            <h5 class="subtitle is-4"><a href="{{ self.subject.url }}">{{ self.subject }}</a></h5>
+            <h5 class="subtitle is-4">
+                <a href="{{ self.subject.url }}">{{ self.subject }}</a>
+            </h5>
             <h1 class="title is-size-1-desktop is-size-3-touch">{{ self.title }}</h1>
             <h5 class="subtitle is-5 article-info">
                 By <a href="{{ self.author.url }}">{{ self.author }}</a>&emsp;|&emsp;{{ self.date }}
+            </h5>
+            <h5 class="subtitle is-5">
+                For
+                {% for aud in self.article_audiences.all %}
+                    <a href="{{ aud.audience.url }}">{{ aud.audience }}</a>
+                    {% if not forloop.last %}
+                        &bull;
+                    {% endif %}
+                {% endfor %}
             </h5>
             <p></p>
         </div>
@@ -48,6 +59,7 @@
             <div class="article-intro content">
                 {{ self.intro | make_markdown }}
             </div>
+
             {% for tag in page.tags.all %}
                 <a class="button" href="{% url 'tag_filter' %}?tag={{ tag }}">
                     {{ tag }}

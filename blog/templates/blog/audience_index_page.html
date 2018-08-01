@@ -1,0 +1,18 @@
+{% extends "hero_page.html" %}
+
+{% block page-content %}
+
+<div class="hero is-light">
+    <div class="hero-body">
+        <div class="container has-text-centered has-tags">
+            {% for audience in audiences %}
+                <a class="button" href="{{ audience.url }}">{{ audience }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% block articles %}
+{% endblock articles %}
+
+{% endblock %}
