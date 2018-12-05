@@ -1,4 +1,5 @@
 {% extends "hero_page.html" %}
+{% load static from staticfiles %}
 
 {% block title %}
     Tagged: {{ tag_query }}
@@ -31,7 +32,16 @@
 </div>
 
 <section class="section">
-    {% include "blog/preview_articles.html" with articles=filter_results %}
+    {% if tag_query %}
+        {% include "blog/preview_articles.html" with articles=filter_results %}
+    {% else %}
+        <div class="columns">
+            <div class="column is-8-desktop is-offset-2-desktop">
+                <p class="subtitle" style="text-align: center">Pick a tag to see posts.</p>
+                <img class="filler-img" src="{% static 'imgs/undraw_post_online_dkuk.svg' %}">
+            </div>
+        </div>
+    {% endif %}
 </section>
 
 {% endblock page-content %}

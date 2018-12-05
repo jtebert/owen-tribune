@@ -1,4 +1,5 @@
 {% extends "hero_page.html" %}
+{% load static from staticfiles %}
 
 {% load wagtailcore_tags create_page_range make_markdown %}
 
@@ -13,7 +14,19 @@
 {% block page-content %}
 
 <section class="section">
-    {% include "blog/preview_articles.html" %}
+    {% if articles %}
+        {% include "blog/preview_articles.html" %}
+    {% else %}
+        <div class="columns">
+            <div class="column is-8-desktop is-offset-2-desktop">
+                <p class="subtitle" style="text-align: center">
+                    I'm definitely working hard on writing something to go here.<br>
+                    Definitely that and not going on a crazy adventure.
+                </p>
+                <img class="filler-img" src="{% static 'imgs/undraw_balloons_vxx5.svg' %}">
+            </div>
+        </div>
+    {% endif %}
 </section>
 
 {% endblock %}

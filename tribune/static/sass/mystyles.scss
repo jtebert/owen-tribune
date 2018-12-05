@@ -9,14 +9,14 @@ $article-width: 1000px;
 
 $navbar-height: 10rem;
 
-$green: #069E2D;
+$green: #03bc25;
 $green-invert: findColorInvert($green);
 
 $size-8: 0.5rem;
 
 $family-sans-serif: 'Montserrat', sans-serif;
-$family-title: 'Montserrat', 'Frank Ruhl Libre', serif;
-$family-subtitle: 'Share Tech', sans-serif;
+$family-title: 'Montserrat', serif;
+$family-subtitle: 'Space Mono', sans-serif;
 
 $title-weight: 500;
 $subtitle-weight: $weight-normal;
@@ -28,7 +28,8 @@ $primary: $black-bis;
 
 $fade-dur: 0.5s;
 
-
+$radius: 0;
+$small-radius: 0;
 
 // Derived variables
 
@@ -72,7 +73,7 @@ a {
 
 .tabs, .subtitle, .article-subject, .article-info {
     font-family: $family-subtitle;
-    text-transform: uppercase;
+    //text-transform: uppercase;
     letter-spacing: 1px;
 }
 
@@ -165,7 +166,7 @@ a {
 .read-more {
     font-family: $family-sans-serif;
     letter-spacing: 2px;
-    text-transform: uppercase;
+    //text-transform: uppercase;
     text-align: right;
     font-weight: 500;
     .icon {
@@ -210,6 +211,14 @@ a {
         margin-left: auto;
         margin-right: auto;
     }
+}
+
+.filler-img {
+    width: 100%;
+    max-width: 350px;
+    display: block;
+    margin: auto;
+    margin-top: $gap/2;
 }
 
 .article {

@@ -21,6 +21,7 @@ Search
                             <input type="text"
                                 class="input is-large"
                                 name="query"
+                                placeholder="Find something interesting"
                                 {% if search_query %} value="{{ search_query }}"{% endif %}>
                         </div>
                         <div class="control">
@@ -45,8 +46,17 @@ Search
 
     {% if search_results %}
         {% include "blog/preview_articles.html" with articles=search_results %}
-    {% elif search_query %}
-        <p style="text-align: center">No articles found</p>
+    {% else %}
+        <div class="columns">
+            <div class="column is-8-desktop is-offset-2-desktop">
+            {% if search_query %}
+                <p class="subtitle" style="text-align: center">Uh oh! No articles found.</p>
+                <img class="filler-img" src="{% static 'imgs/undraw_empty_xct9.svg' %}">
+            {% else %}
+                <img class="filler-img" src="{% static 'imgs/undraw_file_searching_duff.svg' %}">
+            {% endif %}
+            </div>
+        </div>
     {% endif %}
 
 </section>
