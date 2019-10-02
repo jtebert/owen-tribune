@@ -17,8 +17,9 @@
             </h5>
             <h1 class="title is-size-1-desktop is-size-3-touch">{{ self.title }}</h1>
             <h5 class="subtitle is-5 article-info">
-                By <a href="{{ self.author.url }}">{{ self.author }}</a>&emsp;|&emsp;{{ self.date }}
+                By <a href="{{ self.author.url }}">{{ self.author }}</a>&emsp;|&emsp;{{ self.date|date:'F j, Y' }}
             </h5>
+            {% comment %}
             <h5 class="subtitle is-5">
                 For
                 {% for aud in self.article_audiences.all %}
@@ -28,6 +29,7 @@
                     {% endif %}
                 {% endfor %}
             </h5>
+            {% endcomment %}
             <p></p>
         </div>
 

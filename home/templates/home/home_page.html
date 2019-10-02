@@ -9,7 +9,7 @@
 {% block content %}
 {% get_settings %}
 
-<section class="hero is-primary is-medium">
+<section class="hero is-primary is-medium is-patterned">
 
     <div class="hero-body has-text-centered">
         <div class="container">
@@ -35,13 +35,15 @@
               <img src="{{tmp_photo.url}}" {{tmp_photo.attrs}}/>
             </div>
             <div class="column is-5">
-              <h4 class="subtitle is-4"><a href="{{ fa.subject.url }}">{{ fa.subject }}</a></h4>
+              <h4 class="subtitle is-5"><a href="{{ fa.subject.url }}">{{ fa.subject }}</a></h4>
               <h2 class="title is-size-1-desktop is-size-2-touch"><a href="{{ fa.url }}">{{ fa.title }}</a></h2>
-              <h3 class="subtitle is-4">
-                By <a href="{{ fa.author.url }}">{{ fa.author }}</a>
-                &emsp;|&emsp;
-                {{ fa.date }}
+              {% comment %}
+              <h3 class="subtitle is-5">
+                By <a href="{{ fa.author.url }}">{{ fa.author }}</a><!--
+                -->&emsp;|&emsp;<!--
+                -->{{ fa.date }}
               </h3>
+              {% endcomment %}
               <div class="content">{{ fa.intro | make_markdown }}</div>
               <h6 class="read-more">
                   <a href="{{ fa.url }}">

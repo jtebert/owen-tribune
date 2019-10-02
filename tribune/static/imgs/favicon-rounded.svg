@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="72"
+   height="72"
+   viewBox="0 0 71.999997 71.999997"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="favicon-rounded.svg"
+   inkscape:export-filename="/media/devices/Media/git-repos/django-blog/owen-tribune/tribune/static/imgs/favicon.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4"
+     inkscape:cx="169.32121"
+     inkscape:cy="59.931179"
+     inkscape:document-units="px"
+     inkscape:current-layer="g818"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="2560"
+     inkscape:window-height="1404"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     units="px" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-401.25001,-615.86561)">
+    <g
+       id="g818"
+       transform="matrix(0.75000003,0,0,0.75000003,100.31249,171.96638)">
+      <rect
+         rx="15.999999"
+         style="fill:#000000;stroke:#ffffff;stroke-width:8.2264061;stroke-miterlimit:4;stroke-dasharray:none"
+         y="595.97882"
+         x="405.36322"
+         height="87.77359"
+         width="87.77359"
+         id="rect3340"
+         ry="15.999999" />
+      <g
+         transform="translate(-2)"
+         id="text3336"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.36201px;line-height:0%;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.03016746px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         aria-label="J">
+        <path
+           inkscape:connector-curvature="0"
+           id="path815"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:84.74576569px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:'Montserrat Medium';text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:1.03016746px"
+           d="m 448.6144,668.98711 c 12.11865,0 18.55933,-6.52542 18.55933,-19.74576 v -40.25424 h -29.83051 v 7.37288 h 21.44067 v 33.30508 c 0,7.96611 -3.47457,12.0339 -10.16949,12.0339 -5,0 -9.15254,-2.45762 -12.37288,-7.0339 l -4.91525,5.76272 c 3.81356,5.50847 10.25423,8.55932 17.28813,8.55932 z" />
+      </g>
+    </g>
+  </g>
+</svg>

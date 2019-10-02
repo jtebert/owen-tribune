@@ -30,10 +30,34 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700|Space+Mono" rel="stylesheet">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/imgs/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/imgs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/imgs/favicon-16x16.png">
+    <link rel="manifest" href="/static/imgs/site.webmanifest">
+    <link rel="mask-icon" href="/static/imgs/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/static/imgs/favicon.ico">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-config" content="/static/imgs/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
     {% block extra_css %}
     {# Override this in templates to add extra stylesheets #}
     {% endblock %}
 </head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+{% if settings.home.GeneralSettings.google_analytics_id %}
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-54476418-3"></script>
+    <script>
+    var ga_id = '{{ settings.home.GeneralSettings.google_analytics_id }}';
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', ga_id);
+    </script>
+{% endif %}
 
 <body class="{% block body_class %}{% endblock %}">
 
