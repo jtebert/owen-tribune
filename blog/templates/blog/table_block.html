@@ -1,3 +1,5 @@
+{% load make_markdown %}
+
 <table class="table
     {% if data.0|length > 5 %}
         is-narrow
@@ -9,9 +11,9 @@
                 <th>
                     {% if column.strip %}
                         {% if html_renderer %}
-                            {{ column.strip|safe|linebreaksbr }}
+                            {{ column.strip|make_markdown|safe|linebreaksbr }}
                         {% else %}
-                            {{ column.strip|linebreaksbr }}
+                            {{ column.strip|make_markdown|linebreaksbr }}
                         {% endif %}
                     {% endif %}
                 </th>
@@ -27,9 +29,9 @@
                     <th>
                         {% if column.strip %}
                             {% if html_renderer %}
-                                {{ column.strip|safe|linebreaksbr }}
+                                {{ column.strip|make_markdown|safe|linebreaksbr }}
                             {% else %}
-                                {{ column.strip|linebreaksbr }}
+                                {{ column.strip|make_markdown|linebreaksbr }}
                             {% endif %}
                         {% endif %}
                     </th>
@@ -37,9 +39,9 @@
                     <td>
                         {% if column.strip %}
                             {% if html_renderer %}
-                                {{ column.strip|safe|linebreaksbr }}
+                                {{ column.strip|make_markdown|safe|linebreaksbr }}
                             {% else %}
-                                {{ column.strip|linebreaksbr }}
+                                {{ column.strip|make_markdown|linebreaksbr }}
                             {% endif %}
                         {% endif %}
                     </td>

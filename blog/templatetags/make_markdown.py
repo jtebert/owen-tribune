@@ -9,6 +9,7 @@ import sys
 
 register = template.Library()
 
+
 @register.filter(is_safe=True, name='make_markdown')
 @stringfilter
 def make_markdown(value):
