@@ -15,6 +15,8 @@ from __future__ import absolute_import, unicode_literals
 from decouple import config
 import os
 
+from wagtail.embeds.oembed_providers import all_providers
+
 DEBUG = config('DEBUG', cast=bool)
 
 
@@ -163,11 +165,24 @@ TAG_SPACES_ALLOWED = True
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = config('BASE_URL')
 
-# Wagtail settings
 
 WAGTAIL_SITE_NAME = config('SITE_NAME', default="Tribune")
 
 WAGTAILIMAGES_IMAGE_MODEL = 'images.CustomImage'
+
+codepen_embed = {
+    'endpoint': 'http://codepen.io/api/oembed',
+    'urls': [
+        '^http(?:s)?://(?:www\\.)?codepen\\.io/[^#?/]+/pen/.+$',
+    ]
+}
+
+WAGTAILEMBEDS_FINDERS = [
+    {
+        'class': 'wagtail.embeds.finders.oembed',
+        'providers': all_providers + [codepen_embed],
+    }
+]
 
 
 STATICFILES_LOCATION = 'static'
