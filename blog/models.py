@@ -37,12 +37,13 @@ DEFAULT_RICHTEXT_FEATURES = [
     'hr',
     'link',
     'document-link',
+    'superscript', 'subscript', 'strikethrough',
 ]
 
 
 class CaptionedImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
-    caption = blocks.CharBlock(help_text='This will override the default caption.'+md_format_help,
+    caption = blocks.CharBlock(help_text='This will override the default caption. '+md_format_help,
                                blank=True, null=True, required=False)
     image_format = blocks.ChoiceBlock(choices=[
         ('full-width', 'Full width'),
@@ -129,7 +130,7 @@ class ArticlePage(Page):
     date = models.DateField("Post date")
     intro = models.TextField(
         max_length=480,
-        help_text='This will only appear in article previews, not with the full article.'+md_format_help)
+        help_text='This will only appear in article previews, not with the full article. '+md_format_help)
     body = StreamField([
         ('text', blocks.RichTextBlock(features=DEFAULT_RICHTEXT_FEATURES)),
         ('captioned_image', CaptionedImageBlock()),
@@ -339,10 +340,10 @@ class AuthorPage(Page):
     short_bio = models.TextField(
         max_length=800,
         null=True, blank=True,
-        help_text='This text will appear at the end of articles.'+md_format_help)
+        help_text='This text will appear at the end of articles. '+md_format_help)
     long_bio = models.TextField(
         null=True, blank=True,
-        help_text='This text will appear on the author page.'+md_format_help)
+        help_text='This text will appear on the author page. '+md_format_help)
     #personal_website = models.URLField(blank=True)
     twitter_handle = models.CharField(
         max_length=15,

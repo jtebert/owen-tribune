@@ -4,10 +4,8 @@ from django.db import models
 
 from modelcluster.fields import ParentalKey
 
-from wagtail.core.models import Page
-from wagtail.admin.edit_handlers import FieldPanel
-
 from wagtail.core.models import Page, Orderable
+
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, PageChooserPanel, StreamFieldPanel, MultiFieldPanel
 from wagtail.embeds.blocks import EmbedBlock
