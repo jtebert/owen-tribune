@@ -120,7 +120,7 @@
                         <p>
                             <strong>{{ self.author }}</strong>
                             {% if self.author.twitter_handle %}
-                                <small>@{{ self.author.twitter_handle }}</small>
+                                &nbsp;<small><a href="https://twitter.com/{{self.author.twitter_handle}}">@{{ self.author.twitter_handle }}</a></small>
                             {% endif %}
                             <br>
                             {{ self.author.short_bio|make_markdown }}

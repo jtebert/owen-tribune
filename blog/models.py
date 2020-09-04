@@ -135,7 +135,7 @@ class ArticlePage(Page):
         ('text', blocks.RichTextBlock(features=DEFAULT_RICHTEXT_FEATURES)),
         ('captioned_image', CaptionedImageBlock()),
         ('embed', EmbedBlock(icon='media')),
-        ('pull_quote', QuoteBlock()),
+        ('block_quote', QuoteBlock()),
         ('table', TableBlock(template='blog/table_block.html')),
         ('media', OptionsMediaBlock()),
         ('code', CodeBlock()),

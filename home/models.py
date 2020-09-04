@@ -62,7 +62,7 @@ class InfoPage(Page):
         ('text', blocks.RichTextBlock(features=DEFAULT_RICHTEXT_FEATURES)),
         ('captioned_image', blog.models.CaptionedImageBlock()),
         ('embed', EmbedBlock(icon='media')),
-        ('pull_quote', blog.models.QuoteBlock()),
+        ('block_quote', blog.models.QuoteBlock()),
         ('table', blog.models.TableBlock(template='blog/table_block.html')),
         ('media', blog.models.OptionsMediaBlock()),
         ('code', blog.models.CodeBlock()),

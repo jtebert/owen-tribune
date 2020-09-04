@@ -81,7 +81,7 @@ In development, static and media files are served from local folders. In product
   - Create custom subject categories
   - Tag articles
   - Article comments with Disqus
-  - Highly configurable article content, including: markdown-formatted text, tables, captioned images, pull quotes, LaTeX-formatted math, and embedded YouTube videos.
+  - Highly configurable article content, including: markdown-formatted text, tables, captioned images, block quotes, LaTeX-formatted math, and embedded YouTube videos.
   - Out-of-the-box article search functionality
 - Create author profiles for system users
 - Google analytics tracking

@@ -1,6 +1,6 @@
 {% load make_markdown %}
 
-<blockquote class="pull-quote">
+<blockquote class="block-quote">
     {{ self.quote|make_markdown }}
-    <p class="quote-author">– {{ self.author }}</p>
+    <p class="quote-author">{{ self.author }}</p>
 </blockquote>
