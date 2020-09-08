@@ -13,6 +13,8 @@ from home.models import GeneralSettings
 def tag_filter(request):
     tags = ArticlePage.tags.order_by('name')
 
+    # ArticlePage.objects.live().filter(tags__name__in=value['tags'])
+
     # Tag
     tag = request.GET.get('tag')
     if tag:
